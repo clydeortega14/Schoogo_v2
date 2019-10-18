@@ -11,8 +11,20 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', 'LandingPageController@index');
 
-    return view('welcome');
-    
+Route::resource('request-files', 'RequestFilesController');
+
+Route::get('view/{id}', 'LandingPageController@view');
+
+Auth::routes();
+
+Route::middleware(['auth'])->group(function(){
+
+	Route::get('/home', 'HomeController@index')->name('home');
+
+	//FILES
+	Route::get('view/file/{id}', 'RequestFilesController@show')->name('view.file');
+	Route::get('download/{id}', 'RequestFilesController@download')->name('download.file');
+
 });

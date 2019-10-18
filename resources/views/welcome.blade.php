@@ -11,17 +11,17 @@
   <title>SchooGo | Landing Page</title>
 
   <!-- Font Awesome Icons -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
 
   <!-- Plugin CSS -->
-  <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+  <link href="/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
   <!-- Theme CSS - Includes Bootstrap -->
-  <link href="css/creative.css" rel="stylesheet">
+  <link href="/css/creative.css" rel="stylesheet">
 
 </head>
 
@@ -48,6 +48,16 @@
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
                     </li>
+                </ul>
+                <ul class="navbar-nav mr-auto my-2 my-lg-0">
+                    <li class="nav-item">
+                        <a href="{{ route('login') }}" class="nav-link">Login</a>
+                    </li>
+                    @if(Route::has('register'))
+                        <li class="nav-item">
+                            <a href="{{  route('register') }}" class="nav-link">Register</a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>
@@ -77,38 +87,47 @@
                         <h2 class="text-white mt-0">Start uploading your files</h2>
                         <hr class="divider light my-4">
                         <div class="card">
-                            <form>
+                            <form action="{{ route('request-files.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
                                 <div class="card-body">
                                     <div class="form-group row">
                                         <label for="name" class="col-md-4 col-form-label text-md-right">Name :</label>
-                                        <div class="col-md-6">
-                                            <input type="text" name="name" class="form-control" placeholder="Enter your name">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label for="email" class="col-md-4 col-form-label text-md-right">Email :</label>
-                                        <div class="col-md-6">
-                                            <input type="email" name="email" class="form-control" placeholder="Enter your Email">
+                                        <div class="col-md-8">
+                                            <input type="text" name="name" class="form-control" placeholder="Enter your Name">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="address" class="col-md-4 col-form-label text-md-right">Address :</label>
-                                        <div class="col-md-6">
+                                        <div class="col-md-8">
                                             <input type="text" name="address" class="form-control" placeholder="Enter your Address">
                                         </div>
                                     </div>
+
                                     <div class="form-group row">
                                         <label for="contact_number" class="col-md-4 col-form-label text-md-right">Contact Number :</label>
-                                        <div class="col-md-6">
+                                        <div class="col-md-8">
                                             <input type="text" name="contact_number" class="form-control" placeholder="Enter your Contact Number">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
+                                        <label for="purpose" class="col-md-4 col-form-label text-md-right">Purpose :</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="purpose" class="form-control" placeholder="Your purpose">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="summary" class="col-md-4 col-form-label text-md-right">Summary :</label>
+                                        <div class="col-md-8">
+                                            <textarea type="text" name="summary" class="form-control" placeholder="Enter Summary"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
                                         <label for="file" class="col-md-4 col-form-label text-md-right">Upload files here :</label>
-                                        <div class="col-md-6">
+                                        <div class="col-md-8">
                                             <input type="file" name="file">
                                         </div>
                                     </div>
@@ -116,26 +135,24 @@
                                     <div class="form-group row">
                                         <label for="file" class="col-md-4 col-form-label text-md-right">Paper Size :</label>
 
-                                        <div class="col-md-6">
-                                            <div class="radio">
-                                                <label><input type="radio" name="size" value="Long" checked> Long <small> ( 1.50 / page ) </small></label>
-                                            </div>
-                                            <div class="radio">
-                                                <label><input type="radio" name="size" value="Short"> Short <small> ( 1.00 / page ) </small></label>
-                                            </div>
+                                        <div class="col-md-8">
+                                            @foreach($sizes as $size)
+                                                <div class="radio">
+                                                    <label><input type="radio" name="size" value="{{ $size->id }}" checked> {{ $size->size }} <small> ( {{ $size->presentPrice() }} / page ) </small></label>
+                                                </div>
+                                            @endforeach
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="file" class="col-md-4 col-form-label text-md-right">Print Type :</label>
 
-                                        <div class="col-md-6">
-                                            <div class="radio">
-                                                <label><input type="radio" name="type" value="colored" checked> Colored <small> ( 2.00 / page ) </small></label>
-                                            </div>
-                                            <div class="radio">
-                                                <label><input type="radio" name="type" value="black and white"> Black and white <small> ( 1.00 / page ) </small></label>
-                                            </div>
+                                        <div class="col-md-8">
+                                            @foreach($types as $type)
+                                                <div class="radio">
+                                                    <label><input type="radio" name="type" value="{{ $type->id }}" checked> {{ $type->type }} <small> ( {{ $type->presentPrice() }} / page ) </small></label>
+                                                </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                     
@@ -316,68 +333,16 @@
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Plugin JavaScript -->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+  <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
   <!-- Custom scripts for this template -->
-  <script src="js/creative.min.js"></script>
+  <script src="/js/creative.min.js"></script>
 
 </body>
 
 </html>
-
-
-{{-- <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        
-        <!-- Custom Styling -->
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    SchooGo Printing Services
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
-</html> --}}
