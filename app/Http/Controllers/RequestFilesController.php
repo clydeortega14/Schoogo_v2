@@ -20,7 +20,9 @@ class RequestFilesController extends Controller
      */
     public function index()
     {
+        $resources = RequestFile::all();
 
+        return view('pages.admin.files.index', compact('resources'));
     }
 
     /**
@@ -92,8 +94,7 @@ class RequestFilesController extends Controller
     public function edit($id)
     {
         $file = RequestFile::findOrFail($id);
-
-        return view('pages.files.edit', compact('file'));
+        return view('pages.admin.files.edit', compact('file'));
     }
 
     /**
