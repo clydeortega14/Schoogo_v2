@@ -44,13 +44,13 @@
 									<td>{{ $resource->purpose }}</td>
 									<td>{{ $resource->contact_number }}</td>
 									<td>
-										<a href="{{ route('view', ['id' => $resource->id]) }}" class="btn btn-success btn-flat btn-sm">
+										<a href="{{ route('view', ['id' => $resource->id]) }}" class="btn btn-success btn-flat btn-xs" data-toggle="tooltip" data-placement="top" title="view file">
 											<i class="fa fa-street-view"></i>
 										</a> |
-										<a href="{{ route('print.file', ['id' => $resource->id]) }}" class="btn btn-primary btn-flat btn-sm">
+										<a href="{{ route('print.file', ['id' => $resource->id]) }}" class="btn btn-primary btn-flat btn-xs" data-toggle="tooltip" data-placement="top" title="print file">
 											<i class="fa fa-print"></i>
 										</a> |
-										<a href="{{ route('download.file', ['id' => $resource->id]) }}" class="btn btn-info btn-flat btn-sm">
+										<a href="{{ route('download.file', ['id' => $resource->id]) }}" class="btn btn-info btn-flat btn-xs" data-toggle="tooltip" data-placement="top" title="download file">
 											<i class="fa fa-download"></i>
 										</a>
 									</td>

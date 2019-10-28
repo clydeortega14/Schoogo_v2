@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\RequestFile;
 use App\Service\FileManager;
+use App\PaperSize;
+use App\PrintType;
 use DB;
 
 class RequestFilesController extends Controller
@@ -93,8 +95,21 @@ class RequestFilesController extends Controller
      */
     public function edit($id)
     {
-        $file = RequestFile::findOrFail($id);
-        return view('pages.admin.files.edit', compact('file'));
+        $file           = RequestFile::findOrFail($id);
+        $paper_sizes    = PaperSize::all();
+        $print_types    = PrintType::all();
+        $price_per_page = $this->computePricePage($file);
+        $subtotal       = $this->computeSubtotal($file);
+        $total          = $this->computeTotalPrice($file);
+
+        return view('pages.admin.files.edit', compact(
+            'file', 
+            'paper_sizes', 
+            'print_types',
+            'price_per_page',
+            'subtotal',
+            'total'
+        ));
     }
 
     /**
@@ -106,7 +121,16 @@ class RequestFilesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $num_of_page = number_format($request->num_of_page);
+
+        //find file
+        $file = RequestFile::findOrFail($id);
+        //total price
+        $total = $this->computePricePage($file) * $num_of_page;
+        //update file request
+        $file->update(['number_of_page' => $num_of_page, 'total_price' => $total]);
+
+        return back();
     }
 
     /**
@@ -119,4 +143,32 @@ class RequestFilesController extends Controller
     {
         //
     }
+
+    public function computePricePage($file)
+    {
+        return number_format($file->size->presentPrice() + $file->type->presentPrice(), 2);
+    }
+    public function computeSubtotal($file)
+    { 
+
+        if($file->number_of_page > 1){
+
+            return number_format($file->number_of_page * $this->computePricePage($file), 2);
+
+        }else{
+
+            return number_format($file->size->presentPrice() + $file->type->presentPrice(), 2);
+        }
+    }
+    public function computeTotalPrice($file)
+    {
+        $subtotal = $this->computeSubtotal($file);
+        $tax = 10.34;
+        $shipping = 5.80;
+
+        $total = $subtotal + $tax + $shipping;
+
+        return number_format($total, 2);
+    }
+
 }

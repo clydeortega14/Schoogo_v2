@@ -22,12 +22,13 @@ Auth::routes();
 Route::middleware(['auth'])->group(function(){
 
 	Route::get('/home', 'HomeController@index')->name('home');
-
+	
 	
 	//FILES
 	Route::get('files', 'RequestFilesController@index')->name('files');
 	Route::get('view/{id}', 'RequestFilesController@edit')->name('view');
 	Route::get('print/file/{id}', 'RequestFilesController@show')->name('print.file');
 	Route::get('download/file/{id}', 'RequestFilesController@download')->name('download.file');
+	Route::put('compute/request/{id}', 'RequestFilesController@update')->name('compute.request.price');
 
 });
