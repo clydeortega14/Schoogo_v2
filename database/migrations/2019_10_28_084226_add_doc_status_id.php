@@ -17,8 +17,7 @@ class AddDocStatusId extends Migration
             $table->unsignedSmallInteger('docs_status_id')->after('total_price');
 
             //foreign key
-            $table->foreign('docs_status_id')->references('id')->on('docs_statuses')
-                ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('docs_status_id')->references('id')->on('docs_statuses')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

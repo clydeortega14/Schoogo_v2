@@ -22,8 +22,7 @@ Auth::routes();
 Route::middleware(['auth'])->group(function(){
 
 	Route::get('/home', 'HomeController@index')->name('home');
-	
-	
+
 	//FILES
 	Route::get('files', 'RequestFilesController@index')->name('files');
 	Route::get('view/{id}', 'RequestFilesController@edit')->name('view');
