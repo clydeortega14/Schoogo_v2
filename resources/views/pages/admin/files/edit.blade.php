@@ -30,28 +30,28 @@
     				{{-- <h3 class="box-title">Client Info</h3> --}}
 					<div class="form-group">
 	                    <label for="name">Name </label>
-	                    <input type="text" name="name" value="{{ $file->name }}" class="form-control">
+	                    <input type="text" name="name" value="{{ $file->user->firstname }} {{ $file->user->lastname }}" class="form-control">
 	                </div>
 
 	                <div class="form-group">
 	                    <label for="address">Address </label>
-	                    <input type="text" name="address" class="form-control" value="{{ $file->address}}">
+	                    <input type="text" name="address" class="form-control" value="{{ $file->user->address}}">
 	                </div>
 
 	                <div class="form-group">
 	                    <label for="contact_number">Contact Number </label>
-	                    <input type="text" name="contact_number" class="form-control" value="{{ $file->contact_number}}">
+	                    <input type="text" name="contact_number" class="form-control" value="{{ $file->user->contact }}">
 	                </div>	
 
 	                {{-- <h3 class="box-title">File Info</h3> --}}
 					<div class="form-group">
 	                    <label for="docs_name">Docs Name </label>
-	                    <input type="text" name="docs_name" value="{{ $file->purpose }}" class="form-control">
+	                    <input type="text" name="docs_name" value="{{ $file->doc_title }}" class="form-control">
 	                </div>
 
 	                <div class="form-group">
 	                    <label for="summary">Docs Summary </label>
-	                    <input type="text" name="summary" value="{{ $file->summary }}" class="form-control">
+	                    <input type="text" name="summary" value="{{ $file->doc_summary }}" class="form-control">
 	                </div>
 
 	                <div class="form-group">
@@ -82,31 +82,10 @@
     	</div>
 
     	<div class="col-xs-12 col-md-6">
-    		<div class="box">
-    			<div class="box-header">
-    				<div class="row justify-content-between">
-    					{{-- <div class="col-xs-6">
-    						<h3 class="box-title">Payment</h3>
-    					</div> --}}
-    					<div class="col-xs-4">
-    						<div class="form-group">
-    							<select name="status" type="combobox" class="form-control">
-    								<option>New</option>
-    								<option>In process</option>
-    								<option>Shipping</option>
-    								<option>Delivered</option>
-    								<option>Cancelled</option>
-    							</select>
-    						</div>
-    					</div>
-    					<div class="col-xs-2">
-    						<div class="form-group">
-    							<buttton class="btn btn-primary btn-flat">
-    								<i class="fa fa-check"></i>
-    							</buttton>
-    						</div>
-    					</div>
-    				</div>
+    		<div class="box box-primary">
+    			<div class="box-header with-border">
+    				<h3 class="box-title">Document Computation</h3>
+    				<span class="{{ $file->docsStatuses->class }} pull-right">{{ $file->docsStatuses->name }}</span>
     			</div>
 
     			<div class="box-body">
@@ -162,6 +141,21 @@
 	    				</div>
     				</form>
     			</div>
+
+    			<div class="box-footer">
+    				<form action="" method="POST">
+    					<div class="pull-right">
+    						<button type="submit" class="btn btn-primary btn-flat">
+    							<i class="fa fa-thumbs-up"></i>
+    							<span>Approve</span>
+    						</button>
+    						<button type="submit" class="btn btn-warning btn-flat">
+    							<i class="fa fa-thumbs-down"></i>
+    							<span>Disapprove</span>
+    						</button>
+    					</div>
+    				</form>
+    			</div>
     		</div>
     	</div>
     </div>
@@ -170,8 +164,3 @@
 
 @endsection
 
-@section('custom_js')
-
-<script src=""></script>
-
-@endsection

@@ -32,4 +32,8 @@ class RequestFile extends Model
     {
         return $this->belongsTo('App\User', 'user_id');
     }
+    public function docsStatuses()
+    {
+        return $this->hasOne('App\DocsStatus', 'id', 'docs_status_id');
+    }
 }

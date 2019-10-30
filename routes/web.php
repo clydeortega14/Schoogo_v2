@@ -13,10 +13,6 @@
 
 Route::get('/', 'LandingPageController@index');
 
-// Route::resource('request-files', 'RequestFilesController');
-
-// Route::get('view/{id}', 'LandingPageController@view');
-
 Auth::routes();
 
 Route::middleware(['auth'])->group(function(){

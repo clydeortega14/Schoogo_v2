@@ -15,7 +15,7 @@
 <section class="content">
 	<div class="row">
 		<div class="col-xs-2"></div>
-		<div class="col-xs-8">
+		<div class="col-xs-12 col-sm-8">
 			<div class="box">
 				<div class="box-header">
 					<h3 class="box-title">Create Here</h3>

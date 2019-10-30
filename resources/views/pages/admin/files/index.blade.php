@@ -16,8 +16,7 @@
 <section class="content container-fluid">
     
     <div class="row">
-        <div class="col-xs-12">
-            
+        <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="box box-primary">
                 <div class="box-header">
                     <h3 class="box-title">Print Requests</h3>
@@ -29,9 +28,9 @@
                         <thead>
                             <tr>
                                 <th>Document</th>
-                                <th>Sender</th>
-                                <th>Document Name </th>
-                                <th>Contact</th>
+                                <th>Title</th>
+                                <th>Summary</th>
+                                <th>Member</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -43,7 +42,7 @@
 									</td>
 									<td>{{ $resource->doc_title }}</td>
 									<td>{{ $resource->doc_summary }}</td>
-									<td>{{ $resource->user->contact }}</td>
+									<td>{{ $resource->user->firstname }} {{ $resource->user->lastname }}</td>
 									<td>
 										<a href="{{ route('view', ['id' => $resource->id]) }}" class="btn btn-success btn-flat btn-xs" data-toggle="tooltip" data-placement="top" title="view file">
 											<i class="fa fa-street-view"></i>

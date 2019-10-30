@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\RequestFile;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -24,8 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $resources = RequestFile::all();
+        $tickets = RequestFile::orderBy('created_at', 'desc')->get();
+        $members = User::whereNotIn('id', [auth()->user()->id])->take(8)->get();
 
-        return view('home', compact('resources'));
+        return view('home', compact('tickets', 'members'));
     }
 }
