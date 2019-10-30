@@ -34,7 +34,10 @@ class RequestFilesController extends Controller
      */
     public function create()
     {
-        //
+        $sizes    = PaperSize::all();
+        $types    = PrintType::all();
+
+        return view('pages.admin.files.create', compact('sizes', 'types'));
     }
 
     /**
@@ -45,31 +48,41 @@ class RequestFilesController extends Controller
      */
     public function store(Request $request)
     {
+        //validation
+        $this->validate($request, [
+            'file_to_upload' => 'required',
+            'doc_title' => 'required',
+            'doc_summary' => 'required',
+            'paper_size_id' => 'required',
+            'print_type_id' => 'required'
+        ]);
+
+        //transaction
         DB::beginTransaction();
 
         try {
 
+            $filename = '';
             //PORCESS FILE
-            if($request->hasFile('file')){
+            if($request->hasFile('file_to_upload')){
 
-                $file = $request->file;
+                $file = $request->file_to_upload;
                 $filename = rand().'.'.$file->getClientOriginalExtension();
                 $file->storeAs('files\documents', $filename);
             }
-
             //STORE REQUEST FILES
-            RequestFile::create($this->fileManager->data($request->toArray(), $filename));
+            RequestFile::create($request->all()+['user_id' => auth()->user()->id, 'uploaded_file' => $filename, 'docs_status_id' => 1]);
             
         } catch (Exception $e) {
             
-            DB::roleback();
+            DB::rollBack();
 
-            return redirect('/');
+            return redirect()->route('request-files.create')->with('error', $e->getMessage());
         }
 
         DB::commit();
 
-        return 'files uploaded successfully';
+        return redirect()->route('request-files.index')->with('success', 'New Request has been created');
     }
 
     /**

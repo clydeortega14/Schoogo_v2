@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Home')
+@section('title', 'Edit Ticket')
 
 @section('content')
 
@@ -9,7 +9,7 @@
     <h1>Process File</h1>
     <ol class="breadcrumb">
     	<li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-    	<li><a href="{{ route('files') }}"><i class="fa fa-file"></i> Files </a></li>
+    	<li><a href="{{ route('request-files.index') }}"><i class="fa fa-file"></i> Files </a></li>
         <li class="active">Dashboard</li>
     </ol>
 </section>
@@ -27,7 +27,7 @@
     			</div>
 
     			<div class="box-body">
-    				<h3 class="box-title">Client Info</h3>
+    				{{-- <h3 class="box-title">Client Info</h3> --}}
 					<div class="form-group">
 	                    <label for="name">Name </label>
 	                    <input type="text" name="name" value="{{ $file->name }}" class="form-control">
@@ -43,7 +43,7 @@
 	                    <input type="text" name="contact_number" class="form-control" value="{{ $file->contact_number}}">
 	                </div>	
 
-	                <h3 class="box-title">File Info</h3>
+	                {{-- <h3 class="box-title">File Info</h3> --}}
 					<div class="form-group">
 	                    <label for="docs_name">Docs Name </label>
 	                    <input type="text" name="docs_name" value="{{ $file->purpose }}" class="form-control">
@@ -113,7 +113,7 @@
     				<form action="{{ route('compute.request.price', $file->id) }}" method="POST">
     					@method('PUT')
     					@csrf
-	    				<table class="table">
+	    				<table class="table table-bordered">
 	    					<thead>
 	    						<th>Price Per Page</th>
 	    						<th>Number Of Page</th>
@@ -137,7 +137,7 @@
 	    				</table>
 						<br>
 	    				<div class="row">
-	    					<div class="col-xs-6 pull-right">
+	    					<div class="col-xs-12">
 	    						<table class="table">
 					            	<tr>
 					                	<th style="width:50%">Subtotal:</th>

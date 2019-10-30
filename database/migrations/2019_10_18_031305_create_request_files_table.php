@@ -16,8 +16,8 @@ class CreateRequestFilesTable extends Migration
         Schema::create('request_files', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->string('purpose');
-            $table->text('summary')->nullable();
+            $table->string('doc_title');
+            $table->text('doc_summary')->nullable();
             $table->unsignedSmallInteger('paper_size_id');
             $table->unsignedSmallInteger('print_type_id');
             $table->string('uploaded_file');

@@ -43,7 +43,7 @@
       <!-- Optionally, you can add icons to the links -->
       <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
 
-      <li><a href="{{ route('files') }}"><i class="fa fa-link"></i> <span>Print Requests</span></a></li>
+      <li><a href="{{ route('request-files.index') }}"><i class="fa fa-link"></i> <span>Print Requests</span></a></li>
 
       <li class="treeview">
 

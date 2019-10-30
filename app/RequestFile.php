@@ -9,17 +9,15 @@ class RequestFile extends Model
     protected $table = 'request_files';
     protected $fillable = [
 
-    	'purpose',
-    	'summary',
+    	'doc_title',
+    	'doc_summary',
     	'paper_size_id',
     	'print_type_id',
     	'uploaded_file',
-    	'address',
-    	'name',
-    	'contact_number',
+        'user_id',
     	'number_of_page',
-    	'total_price'
-
+    	'total_price',
+        'docs_status_id'
     ];
 
     public function size()
@@ -29,5 +27,9 @@ class RequestFile extends Model
     public function type()
     {
     	return $this->hasOne('App\PrintType', 'id', 'print_type_id');
+    }
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'user_id');
     }
 }

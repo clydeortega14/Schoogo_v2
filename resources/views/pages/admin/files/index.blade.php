@@ -21,6 +21,7 @@
             <div class="box box-primary">
                 <div class="box-header">
                     <h3 class="box-title">Print Requests</h3>
+                    <a href="{{ route('request-files.create') }}" class="btn btn-primary btn-flat pull-right">Create New Ticket</a>
                 </div>
 
                 <div class="box-body">
@@ -40,9 +41,9 @@
 									<td>
 										<img src="/img/files/file1.jpg" alt="..." class="img-fluid mx-auto d-block" height="70" width="70">
 									</td>
-									<td>{{ $resource->name }}</td>
-									<td>{{ $resource->purpose }}</td>
-									<td>{{ $resource->contact_number }}</td>
+									<td>{{ $resource->doc_title }}</td>
+									<td>{{ $resource->doc_summary }}</td>
+									<td>{{ $resource->user->contact }}</td>
 									<td>
 										<a href="{{ route('view', ['id' => $resource->id]) }}" class="btn btn-success btn-flat btn-xs" data-toggle="tooltip" data-placement="top" title="view file">
 											<i class="fa fa-street-view"></i>

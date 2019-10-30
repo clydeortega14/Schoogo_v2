@@ -23,7 +23,6 @@ class DocsStatusSeeder extends Seeder
         ];
 
         foreach ($statuses as $status) {
-        	
         	DocsStatus::create(['name' => $status['name'], 'class' => $status['class']]);
         }
     }
