@@ -71,7 +71,7 @@ class RequestFilesController extends Controller
                 $file->storeAs('files\documents', $filename);
             }
             //STORE REQUEST FILES
-            RequestFile::create($request->all()+['user_id' => auth()->user()->id, 'uploaded_file' => $filename, 'docs_status_id' => 1]);
+            $file = RequestFile::create($request->all()+['user_id' => auth()->user()->id, 'uploaded_file' => $filename, 'docs_status_id' => 1]);
             
         } catch (Exception $e) {
             
@@ -82,7 +82,7 @@ class RequestFilesController extends Controller
 
         DB::commit();
 
-        return redirect()->route('request-files.index')->with('success', 'New Request has been created');
+        return redirect()->route('request-files.edit', $file->id)->with('success', 'New Request has been created');
     }
 
     /**
@@ -109,6 +109,7 @@ class RequestFilesController extends Controller
     public function edit($id)
     {
         $file           = RequestFile::findOrFail($id);
+
         $paper_sizes    = PaperSize::all();
         $print_types    = PrintType::all();
         $price_per_page = $this->computePricePage($file);
@@ -144,6 +145,22 @@ class RequestFilesController extends Controller
         $file->update(['number_of_page' => $num_of_page, 'total_price' => $total]);
 
         return back();
+    }
+
+    public function updateDocStatus(Request $request, $id)
+    {
+        $file = RequestFile::findOrFail($id);
+
+        if($request->has('approve')){
+
+            $file->update(['docs_status_id' => 4]);
+
+        }else if($request->has('disapprove')){
+
+            $file->update(['docs_status_id' => 7]);
+        }
+
+        return back()->with('success', 'you have'.' '.$file->docsStatuses->name.' '.'this request');
     }
 
     /**

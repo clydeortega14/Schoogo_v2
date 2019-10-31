@@ -25,9 +25,25 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $tickets = RequestFile::orderBy('created_at', 'desc')->get();
+        $tickets = RequestFile::where(function($query){
+
+            if(auth()->user()->role_id == 2){
+
+                $query->where('user_id', auth()->user()->id);
+
+            }else if(auth()->user()->role_id == 1){
+                
+                $query->where('docs_status_id', 1);
+            }
+
+
+        })->orderBy('created_at', 'desc')->get();
+
         $members = User::whereNotIn('id', [auth()->user()->id])->take(8)->get();
 
-        return view('home', compact('tickets', 'members'));
+        //members info data
+        $current_request = RequestFile::where('user_id', auth()->user()->id)->latest()->first();
+
+        return view('home', compact('tickets', 'members', 'current_request'));
     }
 }

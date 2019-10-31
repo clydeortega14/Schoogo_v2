@@ -12,14 +12,48 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        User::create(['email' => 'admin@example.com', 'password' => Hash::make('admin123')]);
-        User::create([
-        	'firstname' => 'guest', 
-        	'lastname' => 'guest', 
-        	'email' => 'guest@example.com', 
-        	'password' => Hash::make('admin123'),
-        	'contact' => '09153185249',
-        	'address' => 'San Roque Talisay City, Cebu'
-        ]);
+
+        $users = [
+
+            [
+                'firstname' => 'Administrator', 
+                'lastname' => 'admin cpanel', 
+                'email' => 'admin@cpanel.com',
+                'username' => 'admin123',
+                'password' => Hash::make('password'),
+                'contact' => '09153185249',
+                'address' => 'Secret Town, Developers Home',
+                'role_id' => 1,
+                'status' => true
+            ],
+            [
+                'firstname' => 'Carmelita', 
+                'lastname' => 'Espanya', 
+                'email' => 'member@example.xom',
+                'username' => 'member',
+                'password' => Hash::make('password'),
+                'contact' => '09153185249',
+                'address' => 'Secret Town, Developers Home',
+                'role_id' => 2,
+                'status' => true
+            ],
+
+        ];
+
+        foreach($users as $user){
+
+            User::create([
+
+                'firstname' => $user['firstname'],
+                'lastname' => $user['lastname'],
+                'email' => $user['email'],
+                'username' => $user['username'],
+                'password' => $user['password'],
+                'contact' => $user['contact'],
+                'address' => $user['address'],
+                'role_id' => $user['role_id'],
+                'status' => $user['status'],
+            ]);
+        }
     }
 }
