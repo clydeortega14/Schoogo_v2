@@ -1,0 +1,10 @@
+.learn-more {
+
+    border: 1px solid #fff;
+    background-color: transparent;
+}
+.learn-more:hover {
+
+    background: linear-gradient(rgba(231, 76, 60, 0.8) 30%, rgba(243, 156, 18,0.8) 70%);
+
+}

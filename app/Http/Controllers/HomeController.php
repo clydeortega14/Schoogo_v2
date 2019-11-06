@@ -35,8 +35,6 @@ class HomeController extends Controller
                 
                 $query->where('docs_status_id', 1);
             }
-
-
         })->orderBy('created_at', 'desc')->get();
 
         $members = User::whereNotIn('id', [auth()->user()->id])->take(8)->get();

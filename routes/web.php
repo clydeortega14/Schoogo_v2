@@ -26,7 +26,6 @@ Route::middleware(['auth'])->group(function(){
 	Route::get('print/file/{id}', 'RequestFilesController@show')->name('print.file');
 	Route::get('download/file/{id}', 'RequestFilesController@download')->name('download.file');
 	Route::put('compute/request/{id}', 'RequestFilesController@update')->name('compute.request.price');
-
 	Route::put('update/doc/status/{id}', 'RequestFilesController@updateDocStatus')->name('update.doc.status');
 
 });
