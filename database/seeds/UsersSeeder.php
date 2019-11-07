@@ -19,7 +19,7 @@ class UsersSeeder extends Seeder
                 'firstname' => 'Administrator', 
                 'lastname' => 'admin cpanel', 
                 'email' => 'admin@cpanel.com',
-                'username' => 'admin123',
+                'username' => 'admin',
                 'password' => Hash::make('password'),
                 'contact' => '09153185249',
                 'address' => 'Secret Town, Developers Home',
@@ -27,8 +27,8 @@ class UsersSeeder extends Seeder
                 'status' => true
             ],
             [
-                'firstname' => 'Carmelita', 
-                'lastname' => 'Espanya', 
+                'firstname' => 'Clyde', 
+                'lastname' => 'Ortega', 
                 'email' => 'member@example.xom',
                 'username' => 'member',
                 'password' => Hash::make('password'),
