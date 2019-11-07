@@ -12,19 +12,22 @@
       <!-- Font Awesome Icons -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/css/bootstrap.css">
+
      <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
 
     <!-- Theme CSS - Includes Bootstrap -->    
-    <link href="{{ asset('css/creative.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/creative.css') }}" rel="stylesheet"> --}}
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    Inksite Motorprint
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -78,7 +81,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/creative.js') }}" defer></script>
+    {{-- <script src="{{ asset('js/creative.js') }}" defer></script> --}}
 
     <script src="{{ asset('js/jquery-v3.3.1.js') }}"></script>
     <script src="{{ asset('js/jquery-popper.js') }}"></script>

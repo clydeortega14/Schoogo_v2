@@ -3,9 +3,9 @@
   <!-- Logo -->
   <a href="{{ route('home') }}" class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
-    <span class="logo-mini"><b>A</b>LT</span>
+    <span class="logo-mini"><b>Ink</b></span>
     <!-- logo for regular state and mobile devices -->
-    <span class="logo-lg"><b>Admin</b>LTE</span>
+    <span class="logo-lg"><b>Inksite </b> MotoPrint</span>
   </a>
 
   <nav class="navbar navbar-static-top" role="navigation">
@@ -67,7 +67,7 @@
             <!-- The user image in the navbar-->
             <img src="/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-            <span class="hidden-xs">{{ auth()->user()->email }}</span>
+            <span class="hidden-xs">{{ auth()->user()->firstname }} {{ auth()->user()->lastname }}</span>
           </a>
 
           <ul class="dropdown-menu">

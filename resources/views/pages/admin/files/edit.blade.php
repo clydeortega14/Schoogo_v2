@@ -1,16 +1,15 @@
 @extends('layouts.master')
 
-@section('title', 'Edit Ticket')
+@section('title', 'File Information')
 
 @section('content')
 
 
 <section class="content-header">
-    <h1>Process File</h1>
+    <h1>File Information</h1>
     <ol class="breadcrumb">
     	<li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-    	<li><a href="{{ route('request-files.index') }}"><i class="fa fa-file"></i> Files </a></li>
-        <li class="active">Dashboard</li>
+        <li class="active">File Information</li>
     </ol>
 </section>
 
@@ -51,14 +50,14 @@
     			</div>
 				
     			<div class="box-body">
-    				<strong><i class="fa fa-file margin-r-5 text-center"></i> File Title </strong><br>
+    				<strong><i class="fa fa-file margin-r-5 text-center"></i> File </strong><br>
     				<a href="{{ route('print.file', $file->id) }}"><img src="/img/files/file1.jpg" alt="..." class="img-fluid mx-auto d-block" height="70" width="70"></a>
     				<hr>
-    				<strong><i class="fa fa-file margin-r-5 text-center"></i> File Title </strong>
+    				<strong><i class="fa fa-file margin-r-5 text-center"></i> Title </strong>
 		            <p class="text-muted">{{ $file->doc_title }}</p>
 					<hr>
 
-					<strong><i class="fa fa-file margin-r-5 text-center"></i> File Summary </strong>
+					<strong><i class="fa fa-file margin-r-5 text-center"></i> Summary </strong>
 		            <p class="text-muted">{{ $file->doc_summary }}</p>
 					<hr>
 
@@ -117,6 +116,7 @@
 	    					</tbody>
 	    				</table>
 						<br>
+						@if($file->docs_status_id != 1)
 	    				<div class="row">
 	    					<div class="col-xs-12">
 	    						<table class="table">
@@ -141,6 +141,7 @@
 					            </table>
 	    					</div>
 	    				</div>
+	    				@endif
     				</form>
     			</div>
 				
