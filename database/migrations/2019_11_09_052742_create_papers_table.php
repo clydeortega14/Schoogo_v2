@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRoleIdToUsersTable extends Migration
+class CreatePapersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class AddRoleIdToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->unsignedSmallInteger('role_id')->after('password');
+        Schema::create('papers', function (Blueprint $table) {
+            $table->mediumIncrements('id');
+            $table->unsignedBigInteger('prod_id');
+            $table->string('name');
+            $table->string('gsm');
+            $table->float('price', 8, 2);
 
-            $table->foreign('role_id')->references('id')->on('roles')
+            $table->foreign('prod_id')->references('id')->on('products')
                 ->onDelete('cascade')->onUpdate('cascade');
         });
     }
@@ -28,8 +32,6 @@ class AddRoleIdToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            // $table->dropColumn('role_id');
-        });
+        Schema::dropIfExists('papers');
     }
 }

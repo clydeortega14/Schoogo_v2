@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDocsStatusesTable extends Migration
+class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateDocsStatusesTable extends Migration
      */
     public function up()
     {
-        Schema::create('docs_statuses', function (Blueprint $table) {
-            $table->smallIncrements('id');
+        Schema::create('products', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('name');
-            $table->string('class');
+            $table->text('description')->nullable();
+            $table->string('image')->nullable();
+            $table->boolean('status');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +30,6 @@ class CreateDocsStatusesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('docs_statuses');
+        Schema::dropIfExists('products');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePaperSizesTable extends Migration
+class CreateFinishingTouchesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreatePaperSizesTable extends Migration
      */
     public function up()
     {
-        Schema::create('paper_sizes', function (Blueprint $table) {
+        Schema::create('finishing_touches', function (Blueprint $table) {
             $table->smallIncrements('id');
-            $table->string('size');
+            $table->unsignedBigInteger('prod_id');
+            $table->string('name');
             $table->float('price', 8, 2);
+            
+            $table->foreign('prod_id')->references('id')->on('products')
+            ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -27,6 +31,6 @@ class CreatePaperSizesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paper_sizes');
+        Schema::dropIfExists('finishing_touches');
     }
 }

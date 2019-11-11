@@ -7,11 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class PaperSize extends Model
 {
     protected $table = 'paper_sizes';
-    protected $fillable = ['size', 'price'];
+    protected $fillable = ['prod_id', 'size'];
     public $timestamps = false;
-
-    public function presentPrice()
-    {
-    	return number_format($this->price, 2);
-    }
 }

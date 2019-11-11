@@ -14,13 +14,13 @@
 
 <section class="content container-fluid">
     
-    @if(auth()->user()->role_id == 1)
+{{--     @if(auth()->user()->role_id == 1)
     	@include('partials.home.admin-info')
     @else
 		@include('partials.home.member-info')
     @endif
 
-    @include('partials.home.recent-request')
+    @include('partials.home.recent-request') --}}
 
 </section>
 
