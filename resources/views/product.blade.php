@@ -11,7 +11,7 @@
 			<hr>
 		</div>
 
-		<div class="col-sm-4">
+		<div class="col-sm-12 col-md-4">
 			<div class="card">
 				<div class="card-body">
 					<a href="{{ route('view.product', $product->id) }}">
@@ -38,17 +38,17 @@
 			</div>
 		</div>
 
-		<div class="col-sm-xs-12 col-md-8">
+		<div class="col-sm-12 col-md-8">
 			<h3>Price Calculator</h3>
 			<hr>
 
 			<div class="form-group row">
-				<label for="paper" class="col-md-4 col-form-label text-md-right">{{ __('Paper Size') }}</label>
+				<label for="size" class="col-md-4 col-form-label text-md-right">{{ __('Paper Size') }}</label>
 				<div class="col-md-8">
-					<select name="paper" class="form-control">
-						<option> -- Select Size --</option>
-						<option value="">CSF - 370 gsm</option>
-						<option value="">Cloth Banner - 250 gsm</option>
+					<select name="size" id="size" class="form-control">
+						@foreach($product->sizes as $size)
+							<option value="{{ $size->id }}">{{ $size->size}}</option>
+						@endforeach
 					</select>
 				</div>				
 			</div>
@@ -56,19 +56,19 @@
 			<div class="form-group row">
 				<label for="paper" class="col-md-4 col-form-label text-md-right">{{ __('Choose Paper') }}</label>
 				<div class="col-md-8">
-					<select name="paper" class="form-control">
-						<option> -- Select Paper --</option>
-						<option value="">CSF - 370 gsm</option>
-						<option value="">Cloth Banner - 250 gsm</option>
+					<select name="paper" id="paper" class="form-control">
+						@foreach($product->paper_types as $paper)
+							<option value="{{ $paper->id}}">{{ $paper->name }} - {{ $paper->gsm}} </option>
+						@endforeach
 					</select>
 				</div>				
 			</div>
 
-			<div class="form-group row">
+			{{-- <div class="form-group row">
 				<label for="front_side" class="col-md-4 col-form-label text-md-right">{{ __('Front Side') }}</label>
 				<div class="col-md-8">
 					<select name="front_side" class="form-control">
-						<option> -- Select Print Option --</option>
+						<option> -- Select Print Option -- </option>
 						<option value="">Colored</option>
 						<option value="">Black & White</option>
 						<option value="">Blank</option>
@@ -86,12 +86,16 @@
 						<option value="">Blank</option>
 					</select>
 				</div>				
-			</div>
+			</div> --}}
 
 			<div class="form-group row">
 				<label for="quantity" class="col-md-4 col-form-label text-md-right">{{ __('Quantity') }}</label>
 				<div class="col-md-8">
-					<input type="number" min="1" value="1" class="form-control">
+					<select name="quantity" id="quantity" class="form-control">
+						@foreach($quantities as $quantity)
+							<option value="{{ $quantity->id }}">{{ $quantity->quantity}}</option>
+						@endforeach
+					</select>
 				</div>				
 			</div>
 			<div class="form-group row">
@@ -110,7 +114,10 @@
 				<div class="col-md-12">
 					<div class="float-right">
 						<h5>Estimated Total</h5>
-						<h3>PHP 450.00</h3>
+						<h3>PHP 
+							<span class="prod_price"></span>
+							<input type="hidden" class="prod_price">
+						</h3>
 					</div>
 				</div>
 			</div>
@@ -125,5 +132,68 @@
 		</div>
 	</div>
 </div>
+
+@endsection
+
+@section('custom_js')
+
+<script type="text/javascript">
+	
+	
+	$(function(){
+
+		var size = $('#size option:selected').val();
+		var qty  = $('#quantity option:selected').val();
+
+		getPrice();
+
+		function getPrice()
+		{
+			let url  = `/pricing/${size}/${qty}`;
+
+			getAjax(url);
+		}
+		
+		function getAjax(url)
+		{
+			return $.ajax({
+
+				method : 'GET',
+				url : url,
+				success : function(res){
+
+					$('.prod_price').html(res);
+					$('.prod_price').val(res);
+				},
+				error : function(error){
+					console.log(error)
+				}
+ 			})
+		}
+
+
+		$('#size').change((e) => {
+
+			e.preventDefault();
+
+			let new_size = $(this).find('option:selected').val();
+			let url = `/pricing/${new_size}/${qty}`;
+
+			getAjax(url);
+		});
+
+		$('select[name="quantity"]').change((e) => {
+
+			e.preventDefault();
+
+			let new_qty = $(this).find('option:selected').val();
+
+			console.log(new_qty)
+			let url = `/pricing/${size}/${new_qty}`;
+			getAjax(url);
+		})
+	});
+</script>
+
 
 @endsection

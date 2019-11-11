@@ -33,3 +33,6 @@ Route::middleware(['auth'])->group(function(){
 	// Route::put('update/doc/status/{id}', 'RequestFilesController@updateDocStatus')->name('update.doc.status');
 
 });
+
+/* AJAX */
+Route::get('pricing/{size}/{quantity}', 'LandingPageController@getPrice');

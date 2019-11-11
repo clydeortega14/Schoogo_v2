@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\RequestFile;
 use App\Product;
+use App\Quantity;
+use App\Pricings;
 
 class LandingPageController extends Controller
 {
@@ -21,12 +23,28 @@ class LandingPageController extends Controller
     public function viewProduct($id)
     {
     	$product = Product::findOrFail($id);
-    	return view('product', compact('product'));
+        $quantities = Quantity::all();
+    	return view('product', compact('product', 'quantities'));
     }
 
     public function view($id)
     {
     	$req_file = RequestFile::findOrFail($id);
     	return view('view-file', compact('req_file'));
+    }
+    public function getPrice($size, $qty)
+    {
+        $price = Pricings::where('size', $size)->where('quantity', $qty)->first();
+
+        if($price){
+
+            return response()->json(number_format($price->price, 2));
+            
+        }else{
+
+
+            return response()->json('no price available');
+        }
+
     }
 }

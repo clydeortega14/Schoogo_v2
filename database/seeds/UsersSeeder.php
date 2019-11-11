@@ -23,18 +23,18 @@ class UsersSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'contact' => '09153185249',
                 'address' => 'Secret Town, Developers Home',
-                'role_id' => 1,
+                // 'role_id' => 1,
                 'status' => true
             ],
             [
                 'firstname' => 'Clyde', 
                 'lastname' => 'Ortega', 
-                'email' => 'member@example.xom',
+                'email' => 'member@example.com',
                 'username' => 'member',
                 'password' => Hash::make('password'),
                 'contact' => '09153185249',
                 'address' => 'Secret Town, Developers Home',
-                'role_id' => 2,
+                // 'role_id' => 2,
                 'status' => true
             ],
 
@@ -51,7 +51,7 @@ class UsersSeeder extends Seeder
                 'password' => $user['password'],
                 'contact' => $user['contact'],
                 'address' => $user['address'],
-                'role_id' => $user['role_id'],
+                // 'role_id' => $user['role_id'],
                 'status' => $user['status'],
             ]);
         }

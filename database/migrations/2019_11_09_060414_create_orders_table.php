@@ -16,27 +16,19 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('or_number')->nullable();
-            $table->unsignedBigInteger('user_id'); 
             $table->unsignedBigInteger('product_id');
-            $table->unsignedMediumInteger('paper_size_id');
             $table->unsignedMediumInteger('paper_id');
             $table->unsignedSmallInteger('finishing_touches_id')->nullable();
             $table->unsignedSmallInteger('front')->nullable();
             $table->unsignedSmallInteger('back')->nullable();
-            $table->integer('qty');
+            $table->string('file');
             $table->float('price', 8, 2);
             $table->unsignedSmallInteger('order_status_id');
             $table->timestamps();
 
 
             //foreign keys
-            $table->foreign('user_id')->references('id')->on('users')
-            ->onDelete('cascade')->onUpdate('cascade');
-
             $table->foreign('product_id')->references('id')->on('products')
-            ->onDelete('cascade')->onUpdate('cascade');
-
-            $table->foreign('paper_size_id')->references('id')->on('paper_sizes')
             ->onDelete('cascade')->onUpdate('cascade');
 
             $table->foreign('paper_id')->references('id')->on('papers')
