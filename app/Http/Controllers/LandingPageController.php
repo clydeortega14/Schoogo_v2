@@ -16,35 +16,28 @@ class LandingPageController extends Controller
 
     	return view('welcome', compact('products'));
     }
+
     public function about()
     {
     	return view('about-us');
     }
+
     public function viewProduct($id)
     {
     	$product = Product::findOrFail($id);
         $quantities = Quantity::all();
+
     	return view('product', compact('product', 'quantities'));
     }
 
-    public function view($id)
-    {
-    	$req_file = RequestFile::findOrFail($id);
-    	return view('view-file', compact('req_file'));
-    }
     public function getPrice($size, $qty)
     {
         $price = Pricings::where('size', $size)->where('quantity', $qty)->first();
 
         if($price){
-
             return response()->json(number_format($price->price, 2));
-            
         }else{
-
-
             return response()->json('no price available');
         }
-
     }
 }

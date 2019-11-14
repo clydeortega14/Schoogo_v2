@@ -18,9 +18,6 @@ class CreateOrdersTable extends Migration
             $table->string('or_number')->nullable();
             $table->unsignedBigInteger('product_id');
             $table->unsignedMediumInteger('paper_id');
-            $table->unsignedSmallInteger('finishing_touches_id')->nullable();
-            $table->unsignedSmallInteger('front')->nullable();
-            $table->unsignedSmallInteger('back')->nullable();
             $table->string('file');
             $table->float('price', 8, 2);
             $table->unsignedSmallInteger('order_status_id');
@@ -32,15 +29,6 @@ class CreateOrdersTable extends Migration
             ->onDelete('cascade')->onUpdate('cascade');
 
             $table->foreign('paper_id')->references('id')->on('papers')
-            ->onDelete('cascade')->onUpdate('cascade');
-
-            $table->foreign('finishing_touches_id')->references('id')->on('finishing_touches')
-            ->onDelete('cascade')->onUpdate('cascade');
-
-            $table->foreign('front')->references('id')->on('print_options')
-            ->onDelete('cascade')->onUpdate('cascade');
-
-            $table->foreign('back')->references('id')->on('print_options')
             ->onDelete('cascade')->onUpdate('cascade');
 
             $table->foreign('order_status_id')->references('id')->on('orders_status')

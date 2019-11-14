@@ -33,7 +33,25 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                            @foreach($products as $product)
+                                <tr>
+                                    <td>
+                                        <img src="{{ asset('storage/images/products/'.$product->image) }}" alt="..." height="50" width="50">
+                                    </td>
+                                    <td>{{ $product->name}}</td>
+                                    <td>{{ $product->description}}</td>
+                                    <td>
+                                        <span class="{{ $product->status == true ? 'label label-success' : 'label label-danger'}}">
+                                            {{ $product->status == true ? 'Active' : 'Inactive'}}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary btn-xs btn-flat">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Product;
-use Illuminate\Support\Facades\DB;
+use App\Order;
 
-class ProductsController extends Controller
+class OrdersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        return view('pages.admin.products.index', compact('products'));
+        //
     }
 
     /**
@@ -26,7 +24,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.products.create');
+        //
     }
 
     /**
@@ -37,36 +35,7 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        DB::beginTransaction();
-
-        try {
-            
-            $filename = '';
-
-            if($request->hasFile('image')){
-                $file = $request->file('image');
-                $filename = rand().".".$file->getClientOriginalExtension();
-                $file->storeAs('images\products', $filename);
-            }
-
-            $product = Product::create([
-                'name' => $request->input('name'),
-                'description' => $request->input('description'),
-                'image' => $filename,
-                'status' => true
-            ]);
-
-
-        } catch (Exception $e) {
-
-            DB::rollBack();
-
-            return back();
-        }
-
-        DB::commit();
-
-        return redirect()->route('products.index')->with('success', 'New product has been added');
+        //
     }
 
     /**
@@ -88,9 +57,7 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
-
-        return view('pages.admin.products.edit', compact('product'));
+        //
     }
 
     /**

@@ -14,28 +14,62 @@
 	<!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+    
+    <style>
+    /* Remove the navbar's default rounded borders and increase the bottom margin */ 
+    .navbar {
+      margin-bottom: 50px;
+      border-radius: 0;
+    }
+    
+    /* Remove the jumbotron's default bottom margin */ 
+     .jumbotron {
+      margin-bottom: 0;
+    }
+   
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+  </style>
+
 </head>
 <body>
-<!-- navbar -->
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+
+<div class="jumbotron">
+    <div class="container text-center">
+        <div class="row justify-content-between">
+            <div class="col-xs-12 col-md-6">
+                <h1>InkSite MotoPrint</h1>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <h5>CALL US  272-8169</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            Inksite Motorprint
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+        <a class="navbar-brand" href="#">LOGO</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav mr-auto">
-
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/') }}">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/about-us') }}">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact Us</a>
+                </li>    
             </ul>
-
-            <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
-                <!-- Authentication Links -->
-                @guest
+                 @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Sign In') }}</a>
                     </li>
@@ -67,40 +101,13 @@
         </div>
     </div>
 </nav>
-<!-- JUMBOTRON-->
-{{-- <div class="jumbotron">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4 text-center">
-				<h1>Hello World</h1>
-			</div>
-		</div>
-	</div>
-</div> --}}
-
-<nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
-    <div class="container">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav">
-    			<li class="nav-item">
-    				<a href="{{ url('/') }}" class="nav-link">Products</a>
-    			</li>
-    			<li class="nav-item">
-    				<a href="{{ url('/about-us') }}" class="nav-link">About Us</a>
-    			</li>
-    		</ul>
-        </div>
-    </div>
-</nav>
-
 <br>
 @yield('content')
+<br>
 
-
+<div class="jumbotron text-center">
+    <p>Footer</p>
+</div>
 
 <!-- SCRIPTS -->
 <script src="{{ asset('js/jquery-v3.4.1.js') }}"></script>

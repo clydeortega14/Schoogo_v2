@@ -3,20 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Product;
-use Illuminate\Support\Facades\DB;
 
-class ProductsController extends Controller
+class UploadDesignController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $products = Product::all();
-        return view('pages.admin.products.index', compact('products'));
+        //
+        
     }
 
     /**
@@ -26,48 +24,21 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.products.create');
+        //
+
     }
 
     /**
-     * Store a newly created resource in storage.
+     * .Upload customer design
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function uploadDesign()
     {
-        DB::beginTransaction();
-
-        try {
-            
-            $filename = '';
-
-            if($request->hasFile('image')){
-                $file = $request->file('image');
-                $filename = rand().".".$file->getClientOriginalExtension();
-                $file->storeAs('images\products', $filename);
-            }
-
-            $product = Product::create([
-                'name' => $request->input('name'),
-                'description' => $request->input('description'),
-                'image' => $filename,
-                'status' => true
-            ]);
-
-
-        } catch (Exception $e) {
-
-            DB::rollBack();
-
-            return back();
-        }
-
-        DB::commit();
-
-        return redirect()->route('products.index')->with('success', 'New product has been added');
+        
     }
+    
 
     /**
      * Display the specified resource.
@@ -88,9 +59,7 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
-
-        return view('pages.admin.products.edit', compact('product'));
+        //
     }
 
     /**
