@@ -17,7 +17,10 @@ class CreateCategoriesTable extends Migration
             $table->mediumIncrements('id');
             $table->unsignedBigInteger('product_id');
             $table->string('name');
-            // $table->timestamps();
+            $table->text('description')->nullable();
+            $table->string('image')->nullable();
+            $table->boolean('status')->default(false);
+            $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products')
             ->onDelete('cascade')->onUpdate('cascade');

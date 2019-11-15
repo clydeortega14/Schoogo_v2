@@ -25,12 +25,21 @@ Auth::routes();
 Route::middleware(['auth'])->group(function(){
 
 	Route::get('/home', 'HomeController@index')->name('home');
+	/* PRODUCTS ROUTE */
 	Route::resource('products', 'ProductsController');
+	/* CATEGORIES ROUTE*/
+	Route::resource('categories', 'CategoriesController');
+	Route::put('/update-status/{id}', 'CategoriesController@updateStatus')->name('update.status');
+	/* PRICING ROUTE */
+	Route::resource('pricings', 'PricingController');
+
+	Route::resource('size', 'SizesController');
 
 });
 
 /* AJAX */
 Route::get('pricing/{size}/{quantity}', 'LandingPageController@getPrice');
+Route::post('update/size/{id}', 'SizesController@updateSize');
 
 
 

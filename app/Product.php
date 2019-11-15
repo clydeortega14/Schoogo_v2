@@ -11,6 +11,10 @@ class Product extends Model
     protected $fillable = ['name', 'description', 'image', 'status'];
 
 
+    public function categories()
+    {
+        return $this->hasMany('App\Categories', 'product_id');
+    }
     public function sizes()
     {
     	return $this->hasMany('App\PaperSize', 'prod_id');

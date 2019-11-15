@@ -15,15 +15,16 @@ class CreatePricingsTable extends Migration
     {
         Schema::create('pricings', function (Blueprint $table) {
             $table->mediumIncrements('id');
-            $table->unsignedMediumInteger('size');
-            $table->unsignedSmallInteger('quantity');
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedMediumInteger('category_id');
+            $table->string('size');
+            $table->integer('quantity');
             $table->float('price', 8, 2);
-            // $table->timestamps();
 
-            $table->foreign('size')->references('id')->on('paper_sizes')
+            $table->foreign('product_id')->references('id')->on('products')
             ->onDelete('cascade')->onUpdate('cascade');
 
-            $table->foreign('quantity')->references('id')->on('quantities')
+            $table->foreign('category_id')->references('id')->on('categories')
             ->onDelete('cascade')->onUpdate('cascade');
         });
     }

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\PaperSize;
 use App\Product;
 use Illuminate\Support\Facades\DB;
 
-class ProductsController extends Controller
+class SizesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        return view('pages.admin.products.index', compact('products'));
+        //
     }
 
     /**
@@ -26,7 +26,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.products.create');
+        //
     }
 
     /**
@@ -40,34 +40,22 @@ class ProductsController extends Controller
         DB::beginTransaction();
 
         try {
-            
-            $filename = '';
 
-            if($request->hasFile('image')){
-
-                $file = $request->file('image');
-                $filename = rand().".".$file->getClientOriginalExtension();
-                $file->storeAs('images\products', $filename);
-            }
-
-            $product = Product::create([
-                'name' => $request->input('name'),
-                'description' => $request->input('description'),
-                'image' => $filename,
-                'status' => true
+            PaperSize::create([
+                'prod_id' => $request->input('product_id'),
+                'size' => $request->input('size')
             ]);
-
-
+            
         } catch (Exception $e) {
-
+            
             DB::rollBack();
 
-            return back();
+            return redirect()->route('products.edit', $request->input('product_id'));
         }
 
         DB::commit();
 
-        return redirect()->route('products.index')->with('success', 'New product has been added');
+        return redirect()->route('products.edit', $request->input('product_id'))->with('success', 'new Product size has been created');
     }
 
     /**
@@ -89,9 +77,10 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
+        $size = PaperSize::findOrFail($id);
+        $product = Product::findOrfail($size->prod_id);
 
-        return view('pages.admin.products.edit', compact('product'));
+        return view('pages.admin.products.edit', compact('size', 'product'));
     }
 
     /**
@@ -103,25 +92,15 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = Product::findOrFail($id);
+        $size = PaperSize::findOrFail($id);
 
         DB::beginTransaction();
 
         try {
 
-            $filename = $product->image;
+            $size->update([
 
-            if($request->hasFile('image')){
-
-                $file = $request->file('image');
-                $filename = rand().".".$file->getClientOriginalExtension();
-                $file->storeAs('images\products', $filename);
-            }
-
-            $product->update([
-                'name' => $request->input('name'),
-                'description' => $request->input('description'),
-                'image' => $filename,
+                'size' => $request->input('size')
             ]);
             
         } catch (Exception $e) {
@@ -133,7 +112,7 @@ class ProductsController extends Controller
 
         DB::commit();
 
-        return redirect()->route('products.index')->with('success', 'Product successfully updated');
+        return redirect()->route('products.edit', $size->prod_id);
     }
 
     /**

@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Pricings;
 
-class UploadDesignController extends Controller
+class PricingController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-        //
-        
+        return view('pages.admin.pricings.index');
     }
 
     /**
@@ -24,21 +24,19 @@ class UploadDesignController extends Controller
      */
     public function create()
     {
-        //
-
+        return view('pages.admin.pricings.create');
     }
 
     /**
-     * .Upload customer design
+     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function uploadDesign()
+    public function store(Request $request)
     {
-        
+        //
     }
-    
 
     /**
      * Display the specified resource.

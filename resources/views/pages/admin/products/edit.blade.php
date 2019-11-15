@@ -19,6 +19,7 @@
     	<div class="row">
             <div class="col-xs-12 col-sm-6 col-md-4">
             	<form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
+            	@method('PUT')
         		@csrf
 	                <div class="box box-primary">
 	                    <div class="box-body">
@@ -51,36 +52,57 @@
             <div class="col-xs-12 col-sm-6 col-md-8">
             	<div class="box box-primary">
             		<div class="box-header">
-            			{{ $product->name }} Sizes
+            			{{ $product->name }} Categories
+						<button type="button" class="btn btn-primary btn-flat pull-right" data-toggle="modal" data-target="#add-category">
+							Add category
+						</button>
 
+						@include('pages.admin.categories.modals._add-category')
             		</div>
 
             		<div class="box-body">
 
-            			<form action="#" method="POST">
-
-            				@csrf
-	            			<div class="input-group">
-								<input type="text" name="size" class="form-control">
-								<span class="input-group-btn">
-							    	<button class="btn btn-primary btn-float" type="button">Add</button>
-								</span>
-							</div>
-						</form>
-
-            			<table class="table table-striped">
+            			<table class="table table-striped" id="example2">
             				<thead>
-            					<th>Sizes</th>
             					<th></th>
+            					<th>Name</th>
+            					<th>Description</th>
+            					<th>Status</th>
+            					<th>Action</th>
             				</thead>
             				<tbody>
-            					@foreach($product->sizes as $size)
+            					@foreach($product->categories as $category)
 									<tr>
-										<td>{{ $size->size}}</td>
 										<td>
-											<a href="#" class="btn btn-warning btn-sm btn-flat">Add Pricing</a>
+											<a href="#">
+												<img src="{{ asset('storage/images/categories/'.$category->image)}}" alt="..." class="img-fluid mx-auto d-block" height="50" width="50">
+											</a>
+										</td>
+										<td>{{$category->name}}</td>
+										<td>{{$category->description}}</td>
+										<td>
+											<span class="{{ $category->status == true ? 'label label-success' : 'label label-danger '}}">
+												{{ $category->status == true ? 'Active' : 'Inactive'}}
+											</span>
+										</td>
+										<td>
+											<a href="#" class="btn btn-primary btn-xs btn-flat" data-toggle="modal" data-target="#edit-category-{{ $category->id}}">
+												<i class="fa fa-edit"></i>
+											</a> |
+
+											<button type="button" class="btn btn-warning btn-xs btn-flat" data-toggle="modal" data-target="#update-status-{{ $category->id}}">
+												<i class="fa fa-refresh"></i>
+											</button> |
+
+											<button type="button" class="btn btn-danger btn-xs btn-flat" data-toggle="modal" data-target="#delete-{{ $category->id}}">
+												<i class="fa fa-trash"></i>
+											</button> |
 										</td>
 									</tr>
+
+									@include('pages.admin.categories.modals._edit-category')
+									@include('pages.admin.categories.modals._update-status')
+									@include('pages.admin.categories.modals._delete')
             					@endforeach
             				</tbody>
             			</table>
