@@ -25,7 +25,7 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+            {{-- <div class="container"> --}}
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Inksite Motorprint
                 </a>
@@ -34,10 +34,6 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -54,7 +50,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->firstname }} {{ Auth::user()->lastname }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -72,7 +68,7 @@
                         @endguest
                     </ul>
                 </div>
-            </div>
+            {{-- </div> --}}
         </nav>
 
         <main class="py-4">
@@ -83,7 +79,7 @@
     <!-- Scripts -->
     {{-- <script src="{{ asset('js/creative.js') }}" defer></script> --}}
 
-    <script src="{{ asset('js/jquery-v3.3.1.js') }}"></script>
+    <script src="{{ asset('js/jquery-v3.4.1.js') }}"></script>
     <script src="{{ asset('js/jquery-popper.js') }}"></script>
     <script src="{{ asset('js/jquery-bootstrap.js') }}"></script>
 </body>

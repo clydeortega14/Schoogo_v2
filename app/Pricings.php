@@ -22,4 +22,17 @@ class Pricings extends Model
 
     	];
     }
+    public function formattedPrice()
+    {
+        return number_format($this->price, 2);
+    }
+    public function product()
+    {
+        return $this->belongsTo('App\Product', 'product_id', 'id');
+    }
+    public function categories()
+    {
+        return $this->belongsTo('App\Categories', 'category_id', 'id');
+    }
+
 }

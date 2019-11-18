@@ -3,25 +3,21 @@
 @section('title', 'Home')
 
 @section('content')
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card">
+					<div class="card-header">
+						<h3>Dashboard</h3>
+					</div>
 
-
-<section class="content-header">
-    <h1>Dashboard</h1>
-    <ol class="breadcrumb">
-        <li class="active">Dashboard</li>
-    </ol>
-</section>
-
-<section class="content container-fluid">
-    
-{{--     @if(auth()->user()->role_id == 1)
-    	@include('partials.home.admin-info')
-    @else
-		@include('partials.home.member-info')
-    @endif
-
-    @include('partials.home.recent-request') --}}
-
+					<div class="card-body">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 
 @endsection

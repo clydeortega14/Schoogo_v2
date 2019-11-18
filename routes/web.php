@@ -32,6 +32,8 @@ Route::middleware(['auth'])->group(function(){
 	Route::put('/update-status/{id}', 'CategoriesController@updateStatus')->name('update.status');
 	/* PRICING ROUTE */
 	Route::resource('pricings', 'PricingController');
+	/* Papers Route*/
+	Route::resource('papers', 'PapersController');
 
 	Route::resource('size', 'SizesController');
 

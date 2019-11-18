@@ -146,4 +146,11 @@ class ProductsController extends Controller
     {
         //
     }
+
+    public function productCategories($id)
+    {
+        $product = Product::findOrFail($id);
+        dd($product->categories);
+        return response()->json($product->categories);
+    }
 }

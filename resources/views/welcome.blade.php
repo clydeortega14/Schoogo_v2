@@ -16,24 +16,10 @@
 			@endif
 		</div>
 
-		<div class="col-sm-4">
-			<div class="list-group nav nav-tabs">
-			  	<a href="#all-categories" class="list-group-item list-group-item-action active" data-toggle="tab">
-			  		Products
-			  	</a>
-				@foreach($products as $product)
-				  	<a href="#{{ $product->name }}" class="list-group-item list-group-item-action" data-toggle="tab">
-				  		<i class="fa fa-book"></i>
-				  		<span>{{ $product->name }}</span>
-				  	</a>
-			  	@endforeach
-			</div>
-		</div>
-
-		<div class="col-sm-8">
+		<div class="col-sm-12">
 			<div class="row">
 				<div class="col-sm-12">
-					<h5>Products</h5>
+					<h1>Products</h1>
 					<hr>
 				</div>
 			</div>
@@ -42,7 +28,7 @@
 					<div class="col-sm-4 py-2">
 						<div class="card h-100">
 							<a href="{{ route('display.product', $product->id) }}">
-								<img src="/img/portfolio/thumbnails/1.jpg" alt="..." class="card-img-top" width="100" height="100">
+								<img src="{{ $product->image == null ? '/img/portfolio/thumbnails/1.jpg' : asset('storage/images/products/'. $product->image) }}" alt="..." class="card-img-top" width="300" height="200">
 							</a>
 							<div class="card-body">
 								
@@ -50,7 +36,7 @@
 								<p class="card-text">{{ $product->description}}</p>
 							</div>
 							<div class="card-footer">
-								<a href="{{ route('display.product', $product->id) }}" class="align-center">See Details</a>
+								<a href="{{ route('display.product', $product->id) }}" class="btn btn-primary btn-block">See Details</a>
 							</div>
 						</div>
 					</div>

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Pricings;
+use App\Paper;
 use App\Product;
 
-class PricingController extends Controller
+class PapersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class PricingController extends Controller
      */
     public function index()
     {
-        $pricings = Pricings::all();
-        return view('pages.admin.pricings.index', compact('pricings'));
+        $papers = Paper::all();
+        return view('pages.admin.papers.index', compact('papers'));
     }
 
     /**
@@ -26,8 +26,8 @@ class PricingController extends Controller
      */
     public function create()
     {
-        $products = Product::where('status', true)->get();
-        return view('pages.admin.pricings.create', compact('products'));
+        $products = Product::all();
+        return view('pages.admin.papers.create', compact('products'));
     }
 
     /**
@@ -38,8 +38,7 @@ class PricingController extends Controller
      */
     public function store(Request $request)
     {
-        Pricings::create($request->all());
-        return redirect()->route('pricings.index')->with('success', 'new pricing has been added');
+        //
     }
 
     /**
@@ -61,11 +60,7 @@ class PricingController extends Controller
      */
     public function edit($id)
     {
-        $pricing = Pricings::findOrFail($id);
-        $pricings = Pricings::all();
-        $products = Product::where('status', true)->get();
-
-        return view('pages.admin.pricings.create', compact('pricing', 'pricings', 'products'));
+        //
     }
 
     /**
@@ -77,15 +72,7 @@ class PricingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Pricings::where('id', $id)->update([
-            'product_id' => $request->input('product_id'),
-            'category_id' => $request->input('category_id'),
-            'size' => $request->input('size'),
-            'quantity' => $request->input('quantity'),
-            'price' => $request->input('price'),
-        ]);
-
-        return redirect()->route('pricings.index')->with('success', 'Pricing successfully updated');
+        //
     }
 
     /**
@@ -96,7 +83,6 @@ class PricingController extends Controller
      */
     public function destroy($id)
     {
-        Pricings::where('id', $id)->delete();
-        return redirect()->route('pricings.index')->with('success', 'Deleted');
+        //
     }
 }

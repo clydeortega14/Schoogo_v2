@@ -36,7 +36,7 @@
 
 </head>
 <body>
-
+{{-- 
 <div class="jumbotron">
     <div class="container text-center">
         <div class="row justify-content-between">
@@ -48,11 +48,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<nav class="navbar navbar-expand-sm bg-light navbar-light box-shadow">
     <div class="container">
-        <a class="navbar-brand" href="#">LOGO</a>
+        <a class="navbar-brand" href="{{ url('/') }}">Inksite Moto Print</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -62,10 +62,10 @@
                     <a class="nav-link" href="{{ url('/') }}">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/about-us') }}">About Us</a>
+                    <a class="nav-link" href="{{ url('/about-us') }}">About us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact Us</a>
+                    <a class="nav-link" href="#">Contact us</a>
                 </li>    
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -104,10 +104,10 @@
 <br>
 @yield('content')
 <br>
-
+{{-- 
 <div class="jumbotron text-center">
     <p>Footer</p>
-</div>
+</div> --}}
 
 <!-- SCRIPTS -->
 <script src="{{ asset('js/jquery-v3.4.1.js') }}"></script>

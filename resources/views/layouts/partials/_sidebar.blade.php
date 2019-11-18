@@ -70,6 +70,29 @@
 
       </li>
 
+      <li class="treeview">
+
+        <a href="#"><i class="fa fa-link"></i> <span>Papers</span>
+
+          <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+          </span>
+
+        </a>
+        <ul class="treeview-menu">
+
+          <li class="{{ request()->routeIs('papers.create')}}">
+            <a href="{{ route('papers.create') }}">Add paper</a>
+          </li>
+
+          <li class="{{ request()->routeIs('papers.index') }}">
+            <a href="{{ route('papers.index') }}">Papers Lists</a>
+          </li>
+
+        </ul>
+
+      </li>
+
     </ul>
 
   </section>
