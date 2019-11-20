@@ -33,7 +33,7 @@
 
                           <div class="col-sm-8">
                             <select name="product_id" id="product" class="form-control">
-                                <option value=""> Select Product</option>
+                                {{-- <option value=""> Select Product</option> --}}
                                 @foreach($products as $product)
                                     <option value="{{ $product->id }}" {{ isset($pricing) && $product->id == $pricing->product_id ? 'selected' : '' }}>{{ $product->name}}</option>
                                 @endforeach
@@ -52,7 +52,7 @@
                                     <option value="{{ $category->id }}" {{ $category->id == $pricing->category_id ? 'selected' : ''}}> {{ $pricing->categories->name }}</option>
                                     @endforeach
                                 @else
-                                    <option value="">Selecte Category</option>
+                                    {{-- <option value="">Selecte Category</option> --}}
                                 @endif
                             </select>
                           </div>
@@ -63,7 +63,11 @@
                           <label for="size" class="col-sm-3 control-label">Size</label>
 
                           <div class="col-sm-8">
-                            <input type="text" name="size" value="{{ isset($pricing) ? $pricing->size : '' }}" class="form-control">
+                            <select name="size" id="size" class="form-control">
+                                @foreach($sizes as $size)
+                                <option value="{{ $size->id }}">{{ $size->size }}</option>
+                                @endforeach
+                            </select>
                           </div>
                         </div>
 

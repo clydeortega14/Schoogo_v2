@@ -10,46 +10,34 @@ use App\PaperSize;
 use App\Paper;
 use App\Order;
 use App\DeliverAddress;
+use App\Size;
 use Illuminate\Support\Facades\DB;
 
 class OrderProductController extends Controller
 {
-    public function checkout(Request $req, $id)
+    public function checkout(Request $req)
     {
-       $pricing = $this->getPricing($req->input('size'), $req->input('quantity'));
-       $product = Product::findOrFail($id);
-       $size    = PaperSize::findOrFail($req->input('size'));
-       $paper   = $this->getPaper($req->input('paper'));
-       $quantity = Quantity::findOrFail($req->input('quantity'));
-
-       if(is_null($pricing)){
-
+        $session = $req->session()->get('data');
+        if($session['price'] == null){
             return back()->with('message', 'Pricing not available');
-       }
+        }
 
-       $total_price = $this->computeTotalPrice($pricing->price, $paper->price);
+        $pricing = pricings::where('product_id', $session['product_id'])
+        ->where('category_id', $session['category_id'])
+        ->where('size', $session['size'])
+        ->where('quantity', $session['quantity'])
+        ->first();
 
-       //order data
-       $orderData = $this->orderData($product->id, $pricing->id, $size->id, $paper->id, $quantity->id, $total_price);
-
-       //session data
-       $sessionData = [
-
-            'product' => $product->name,
-            'size'    => $size->size,
-            'paper'   => $paper->name.' - '.$paper->gsm,
-            'quantity' => $quantity->quantity,
-       ];
-
-       return view('guest-detail', compact('orderData', 'sessionData'));
+        return view('guest-detail', compact('session','pricing'));
     }
 
-    public function orderNow(Request $request)
+    public function orderNow(Request $request, $id)
     {
+        $pricing = Pricings::findOrFail($id);
+        $session = $request->session()->get('data');
+        // $pricing  = $this->getPricing($request->input('size'), $request->input('quantity'));
+        // $paper = $this->getPaper($request->input('paper_id'));
 
-
-        $pricing  = $this->getPricing($request->input('size'), $request->input('quantity'));
-        $paper = $this->getPaper($request->input('paper_id'));
 
         DB::beginTransaction();
 
@@ -57,27 +45,17 @@ class OrderProductController extends Controller
 
             //MUST CREATE DELIVERY ADDRESS FIRST
             $deliver_address = $this->createDeliverAddress($request->toArray());
-            $filename = '';
-
-            if($deliver_address){
-
-                if($request->hasFile('file')){
-
-                    $filename = $this->processFile($request->file('file'));
-                }
 
                 Order::create([
                     'or_number' => $this->genOrNumber(),
-                    'product_id' => $request->input('product_id'),
+                    'product_id' => $pricing->product_id,
                     'pricing_id' => $pricing->id,
-                    'paper_id' => $request->input('paper_id'),
-                    'file' => $filename,
-                    'price' => $this->computeTotalPrice($pricing->price, $paper->price),
+                    // 'paper_id' => $request->input('paper_id'),
+                    'file' => $session[0],
+                    'price' => $pricing->pricingFormattedPrice(),
                     'deliver_to' => $deliver_address->id,
                     'order_status_id' => 1
                 ]);
-
-            }
             
         } catch (Exception $e) {
             

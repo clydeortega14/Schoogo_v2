@@ -14,34 +14,19 @@ class ProductsSeeder extends Seeder
     {
         $products = [
         	[
-	        	'name' => 'Brochures',
-	        	'description' => 'This is a brochure',
-	        	'status' => true
+	        	'name' => 'Business Cards',
+	        	'description' => 'this is a business card',
+	        	
         	],
         	[
-        		'name' => 'Business Forums',
-        		'description' => 'This is a business forum',
-        		'status' => true
+        		'name' => 'Marketing Collaterals',
+        		'description' => 'this is a marketing collaterals',
+        		
         	],
         	[
-        		'name' => 'Flyers',
-        		'description' => 'This is a flyers',
-        		'status' => true
-        	],
-        	[
-        		'name' => 'Business Cards',
-        		'description' => 'This is a business card',
-        		'status' => true
-        	],
-        	[
-        		'name' => 'stickers',
-        		'description' => 'this is a sticker',
-        		'status' => true
-        	],
-        	[
-        		'name' => 'post cards',
-        		'description' => 'this is a post cards',
-        		'status' => true
+        		'name' => 'Office Forums',
+        		'description' => 'This is an office forums',
+        		
         	],
         ];
 
@@ -49,7 +34,6 @@ class ProductsSeeder extends Seeder
         	Product::create([
         		'name' => $product['name'],
         		'description' => $product['description'],
-        		'status' => $product['status']
         	]);
         }
     }

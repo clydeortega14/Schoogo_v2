@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Pricings;
 use App\Product;
+use App\Size;
 
 class PricingController extends Controller
 {
@@ -27,7 +28,8 @@ class PricingController extends Controller
     public function create()
     {
         $products = Product::where('status', true)->get();
-        return view('pages.admin.pricings.create', compact('products'));
+        $sizes = Size::all();
+        return view('pages.admin.pricings.create', compact('products', 'sizes'));
     }
 
     /**
@@ -64,8 +66,9 @@ class PricingController extends Controller
         $pricing = Pricings::findOrFail($id);
         $pricings = Pricings::all();
         $products = Product::where('status', true)->get();
+        $sizes = Size::all();
 
-        return view('pages.admin.pricings.create', compact('pricing', 'pricings', 'products'));
+        return view('pages.admin.pricings.create', compact('pricing', 'pricings', 'products', 'sizes'));
     }
 
     /**

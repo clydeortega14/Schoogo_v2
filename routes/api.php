@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/product-categories/{id}', 'ProductsController@productCategories');
+Route::get('/get-quantities/{size}', 'LandingPageController@getQuantities');

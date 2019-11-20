@@ -15,9 +15,9 @@ class CreatePricingsTable extends Migration
     {
         Schema::create('pricings', function (Blueprint $table) {
             $table->mediumIncrements('id');
-            $table->unsignedBigInteger('product_id');
-            $table->unsignedMediumInteger('category_id');
-            $table->string('size');
+            $table->unsignedBigInteger('product_id')->nullable();
+            $table->unsignedMediumInteger('category_id')->nullable();
+            // $table->string('size');
             $table->integer('quantity');
             $table->float('price', 8, 2);
 

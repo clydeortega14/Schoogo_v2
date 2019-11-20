@@ -75,7 +75,7 @@
 									<tr>
 										<td>
 											<a href="#">
-												<img src="{{ asset('storage/images/categories/'.$category->image)}}" alt="..." class="img-fluid mx-auto d-block" height="50" width="50">
+												<img src="{{ $category->image == null ? '/img/portfolio/thumbnails/1.jpg' : asset('storage/images/categories/'.$category->image)}}" alt="..." class="img-fluid mx-auto d-block" height="50" width="50">
 											</a>
 										</td>
 										<td>{{$category->name}}</td>

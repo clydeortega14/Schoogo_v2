@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->string('or_number')->nullable();
             $table->unsignedBigInteger('product_id');
-            $table->unsignedMediumInteger('paper_id');
+            $table->unsignedMediumInteger('paper_id')->nullable();
             $table->string('file');
             $table->float('price', 8, 2);
             $table->unsignedSmallInteger('order_status_id');

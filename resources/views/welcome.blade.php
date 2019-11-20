@@ -36,7 +36,7 @@
 								<p class="card-text">{{ $product->description}}</p>
 							</div>
 							<div class="card-footer">
-								<a href="{{ route('display.product', $product->id) }}" class="btn btn-primary btn-block">See Details</a>
+								<a href="{{ route('product.categories', $product->id) }}" class="btn btn-primary btn-block">See Details</a>
 							</div>
 						</div>
 					</div>

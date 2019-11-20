@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Size;
 use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
@@ -90,8 +91,8 @@ class ProductsController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-
-        return view('pages.admin.products.edit', compact('product'));
+        $sizes = Size::all();
+        return view('pages.admin.products.edit', compact('product', 'sizes'));
     }
 
     /**
@@ -150,7 +151,6 @@ class ProductsController extends Controller
     public function productCategories($id)
     {
         $product = Product::findOrFail($id);
-        dd($product->categories);
         return response()->json($product->categories);
     }
 }

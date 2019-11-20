@@ -16,8 +16,13 @@ Route::get('/about-us', 'LandingPageController@about');
 
 // FOR GUEST
 Route::get('/display-product/{id}', 'LandingPageController@viewProduct')->name('display.product');
-Route::post('/checkout/{id}', 'OrderProductController@checkout');
-Route::post('/order-now', 'OrderProductController@orderNow')->name('order.now');
+Route::get('/product-categories/{prodId}', 'LandingPageController@productCategories')->name('product.categories');
+Route::get('/price-calculation/{prodId}/{categoryId}', 'LandingPageController@priceCalculation')->name('price.calculation');
+Route::get('/upload-design/', 'LandingPageController@uploadDesign')->name('upload.design');
+Route::post('/checkout', 'LandingPageController@checkout')->name('checkout');
+// Route::get('/product-options', 'LandingPageController@productOptions')->name('product.options');
+Route::get('/order-checkout', 'OrderProductController@checkout')->name('order.checkout');
+Route::post('/order-now/{id}', 'OrderProductController@orderNow')->name('order.now');
 
 
 Auth::routes();
@@ -34,6 +39,8 @@ Route::middleware(['auth'])->group(function(){
 	Route::resource('pricings', 'PricingController');
 	/* Papers Route*/
 	Route::resource('papers', 'PapersController');
+	/*Orders Route*/
+	Route::resource('orders', 'OrdersController');
 
 	Route::resource('size', 'SizesController');
 

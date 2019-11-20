@@ -15,13 +15,12 @@ class Product extends Model
     {
         return $this->hasMany('App\Categories', 'product_id');
     }
-    public function sizes()
-    {
-    	return $this->hasMany('App\PaperSize', 'prod_id');
-    }
     public function paper_types()
     {
     	return $this->hasMany('App\Paper', 'prod_id');
     }
-
+    public function pricings()
+    {
+        return $this->hasMany('App\Pricings', 'product_id', 'id');
+    }
 }

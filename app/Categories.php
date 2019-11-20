@@ -19,4 +19,8 @@ class Categories extends Model
     		'image' => $image,
     	];
     }
+    public function sizes()
+    {
+        return $this->hasMany('App\Size', 'category_id', 'id');
+    }
 }

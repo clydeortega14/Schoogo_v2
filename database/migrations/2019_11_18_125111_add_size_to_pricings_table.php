@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateQuantitiesTable extends Migration
+class AddSizeToPricingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateQuantitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('quantities', function (Blueprint $table) {
-            $table->smallIncrements('id');
-            $table->integer('quantity');
-            // $table->timestamps();
+        Schema::table('pricings', function (Blueprint $table) {
+            $table->unsignedmediumInteger('size')->after('category_id');
         });
     }
 
@@ -27,6 +25,8 @@ class CreateQuantitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quantities');
+        Schema::table('pricings', function (Blueprint $table) {
+            $table->dropColumn('size');
+        });
     }
 }
