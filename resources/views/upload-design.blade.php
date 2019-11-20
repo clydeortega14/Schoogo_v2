@@ -31,7 +31,7 @@
 					<select name="size" id="size" class="form-control">
 						@foreach($sizes as $size)
 							<option value="{{ $size->id }}" {{ $size->id == $sessionData['size'] ? 'selected' : '' }}>{{ $size->size}}</option>
-						@endforeach()	
+						@endforeach
 					</select>
 				</div>
 			</div>

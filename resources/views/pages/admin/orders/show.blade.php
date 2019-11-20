@@ -113,20 +113,12 @@
 		</div>
 		<div class="col-md-5">
 			<div class="box box-widget widget-user-2">
-            <!-- Add the bg color to the header using any of the bg-* classes -->
-            {{-- <div class="widget-user-header bg-yellow">
-              <div class="widget-user-image">
-                <img class="img-circle" src="../dist/img/user7-128x128.jpg" alt="User Avatar">
-              </div>
-              <!-- /.widget-user-image -->
-              <h3 class="widget-user-username">Nadia Carmichael</h3>
-              <h5 class="widget-user-desc">Lead Developer</h5>
-            </div> --}}
+
             <div class="box-footer no-padding">
               <ul class="nav nav-stacked">
                 <li class="text-center"><h3>Order Summary</h3></li>
-                <li><a href="#">Product <span class="pull-right">{{ $order->pricing->product->name }}</span></a></li>
-                <li><a href="#">Category <span class="pull-right">{{ $order->pricing->categories->name }}</span></a></li>
+                <li><a href="#">Product <span class="pull-right">{{ $order->product->name }}</span></a></li>
+                {{-- <li><a href="#">Category <span class="pull-right">{{ $order->pricing->categories->name }}</span></a></li> --}}
                 <li><a href="#">Size <span class="pull-right">{{ $order->pricing->sizes->size}}</span></a></li>
                 <li><a href="#">Quantity <span class="pull-right">{{ $order->pricing->quantity }}</span></a></li>
                 <li>

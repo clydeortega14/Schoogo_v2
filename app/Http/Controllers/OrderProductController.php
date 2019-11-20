@@ -11,6 +11,7 @@ use App\Paper;
 use App\Order;
 use App\DeliverAddress;
 use App\Size;
+use App\Categories;
 use Illuminate\Support\Facades\DB;
 
 class OrderProductController extends Controller
@@ -22,22 +23,20 @@ class OrderProductController extends Controller
             return back()->with('message', 'Pricing not available');
         }
 
-        $pricing = pricings::where('product_id', $session['product_id'])
-        ->where('category_id', $session['category_id'])
-        ->where('size', $session['size'])
+        $pricing = pricings::where('size', $session['size'])
         ->where('quantity', $session['quantity'])
         ->first();
 
-        return view('guest-detail', compact('session','pricing'));
+        $product  = Product::findOrFail($session['product_id']);
+        $category = Categories::findOrFail($session['category_id']);
+
+        return view('guest-detail', compact('session','pricing', 'category', 'product'));
     }
 
     public function orderNow(Request $request, $id)
     {
         $pricing = Pricings::findOrFail($id);
         $session = $request->session()->get('data');
-        // $pricing  = $this->getPricing($request->input('size'), $request->input('quantity'));
-        // $paper = $this->getPaper($request->input('paper_id'));
-
 
         DB::beginTransaction();
 
@@ -48,11 +47,11 @@ class OrderProductController extends Controller
 
                 Order::create([
                     'or_number' => $this->genOrNumber(),
-                    'product_id' => $pricing->product_id,
+                    'product_id' => $request->input('product_id'),
                     'pricing_id' => $pricing->id,
                     // 'paper_id' => $request->input('paper_id'),
                     'file' => $session[0],
-                    'price' => $pricing->pricingFormattedPrice(),
+                    'price' => $pricing->price,
                     'deliver_to' => $deliver_address->id,
                     'order_status_id' => 1
                 ]);

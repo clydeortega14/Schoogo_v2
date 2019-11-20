@@ -1,91 +1,55 @@
 @section('custom_js')
-
 <script type="text/javascript">
-		
+
 	$(function(){
 
-		var prod_id = $('#prod-id');
-		var category_id = $('#category-id');
-		var size = $('#size');
-		var quantity = $('#quantity')
-		getPrice();
-
-		function getPrice()
-		{
-			var data = {
-				product_id : prod_id.val(),
-				category : category_id.find('option:selected').val(),
-				size : size.find('option:selected').val(),
-				quantity : $('#quantity option:selected').val()
-			}
-
-			let url  = `/pricing/${data.product_id}/${data.category}/${data.size}/${data.quantity}`;
-			console.log(url)
-			getAjax(url);
-		}
-
-		category_id.change((e) => {
-
-			var data = {
-				product_id : prod_id.val(),
-				category : e.target.value,
-				size : size.find('option:selected').val(),
-				quantity : $('#quantity option:selected').val()
-			}
-
-			let url  = `/pricing/${data.product_id}/${data.category}/${data.size}/${data.quantity}`;
-			console.log(url)
-			getAjax(url);
+		let size = $('#size')
+		let url = `/api/get-quantity/${size.val()}`
+		$.get(url, function(data){
+			optionData(data);
+			initialCalculation();
 		})
 
-		$('#size').change((e) => {
 
-			e.preventDefault();
-			var data = {
-				product_id : prod_id.val(),
-				category : category_id.find('option:selected').val(),
-				size : size.find('option:selected').val(),
-				quantity : $('#quantity option:selected').val()
-			}
-			let url  = `/pricing/${data.product_id}/${data.category}/${data.size}/${data.quantity}`;
-			console.log(url);
-			getAjax(url);
+		//events
+		size.change((e) => {
+
+			let url = `/api/get-quantity/${e.target.value}`
+			$.get(url, function(data){
+				optionData(data)
+				calculation(e.target.value, $('#quantity option:selected').val())
+			})
+		})
+
+		$('#quantity').change((e) => {
+			calculation(size.val(), e.target.value)
+		})
+
+	});
+
+	function optionData(data){
+
+		$('#quantity').empty()
+		data.forEach((index, value) => {
+			$('#quantity').append(`<option value=${index.quantity}>${index.quantity}</option>`)
 		});
 
-		$('select[name="quantity"]').change((e) => {
-
-			e.preventDefault();
-			var data = {
-				product_id : prod_id.val(),
-				category : category_id.find('option:selected').val(),
-				size : size.find('option:selected').val(),
-				quantity : e.target.value
-			}
-			let url  = `/pricing/${data.product_id}/${data.category}/${data.size}/${data.quantity}`;
-			console.log(url)
-			getAjax(url);
+	}
+	function calculation(size, qty)
+	{
+		let url = `/api/get-price/${size}/${qty}`
+		$.get(url, function(data){
+			$('.prod_price').html(data)
+			$('input[name="price"]').val(data)
 		})
-
-
-		function getAjax(url)
-		{
-			return $.ajax({
-
-				method : 'GET',
-				url : url,
-				success : function(res){
-					$('.prod_price').html(res);
-					$('.prod_price').val(res);
-				},
-				error : function(error){
-					console.log(error)
-				}
-			})
-		}	
-});	
-		
-
-		
-	
+	}
+	function initialCalculation()
+	{
+		let data = {
+			size : $('#size').val(),
+			quantity : $('#quantity option:selected').val()
+		}
+		calculation(data.size, data.quantity);
+	}
 </script>
 @endsection

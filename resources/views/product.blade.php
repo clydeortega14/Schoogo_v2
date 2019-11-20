@@ -6,11 +6,11 @@
 
 <div class="container">
 	<form action="{{ route('upload.design') }}" method="GET">
-
 		@csrf
 		<div class="row">
 			<div class="col-xs-12 col-sm-12">
 				<h1>{{ $product->name }}</h1>
+				<input type="hidden" name="category_id" id="category-id" value="{{ $category->id}}">
 				<input type="hidden" id="prod-id" value="{{ $product->id }}">
 				<input type="hidden" name="product_id" value="{{ $product->id }}">
 				<hr>
@@ -44,8 +44,8 @@
 					<label for="size" class="col-md-4 col-form-label text-md-right">{{ __('Size') }}</label>
 					<div class="col-md-8">
 						<select name="size" id="size" class="@error('size') is-invalid @enderror form-control">
-							@foreach($sizes as $size)
-								<option value="{{ $size->id}}">{{ $size->size }}</option>
+							@foreach($pricings->unique('size') as $price)
+								<option value="{{ $price->sizes->id}}">{{ $price->sizes->size }}</option>
 							@endforeach
 						</select>
 
@@ -60,12 +60,7 @@
 				<div class="form-group row">
 					<label for="quantity" class="col-md-4 col-form-label text-md-right">{{ __('Quantity') }}</label>
 					<div class="col-md-8">
-						<select class="form-control" name="quantity" id="quantity">
-							{{-- <option value="">Select</option> --}}
-						{{-- @foreach($product->pricings->unique('quantity') as $pricing)
-							<option value="{{ $pricing->quantity}}"> {{ $pricing->quantity}}</option>
-						@endforeach --}}
-						</select>
+						<select class="form-control" name="quantity" id="quantity"></select>
 					</div>				
 				</div>
 				<div class="row">
@@ -84,10 +79,8 @@
 					<div class="col-sm-4"></div>
 					<div class="col-sm-8">
 						<button type="submit" class="btn btn-info btn-block">
-						{{-- <i class="fa fa-money-bill-alt"></i> --}}
 						<span>Upload Design</span>
 					</button>
-						{{-- <a href="{{ route('upload.design') }}" class="btn btn-info btn-block">Continue Uploading Design</a> --}}
 					</div>
 				</div>
 			</div>
@@ -112,27 +105,75 @@
 {{-- @include('partials.scripts.information') --}}
 @section('custom_js')
 <script type="text/javascript">
+
 	$(function(){
 
-		var size = $('#size option:selected').val();
-		var quantity = $('#quantity');
-		var url = `/api/get-quantities/${size}`;
-
-		$.ajax({
-
-			method : 'GET',
-			url : url,
-			success : function(res){
-				// console.log(res)
-				quantity.empty()
-				res.forEach((index, value) =>{
-					quantity.append(`<option value="${index.quantity}">${index.quantity}</option>`)
-				})
-			},
-			error : function(error){
-				console.log(error)
-			}
+		//size
+		let product_id = $('#prod-id')
+		let category_id = $('#category-id')
+		let size_url = `/api/get-size/${product_id.val()}/${category_id.val()}`;
+		$.get(size_url, function(data){
+			sizeOptions(data)
+			getQuantity()
 		})
+
+		//events
+		$('#size').change((e) => {
+
+			let url = `/api/get-quantity/${e.target.value}`
+			$.get(url, function(data){
+				quantityOptions(data)
+				calculation(e.target.value, $('#quantity option:selected').val())
+			})
+		})
+
+		$('#quantity').change((e) => {
+			calculation($('#size').val(), e.target.value)
+		})
+
 	});
+
+	function getQuantity()
+	{
+		let size = $('#size')
+		let url = `/api/get-quantity/${size.val()}`
+		$.get(url, function(data){
+			quantityOptions(data);
+			initialCalculation();
+		})
+	}
+
+	function sizeOptions(data){
+
+		$('#size').empty()
+		data.forEach((index, value) => {
+			$('#size').append(`<option value=${index.id}>${index.size}</option>`)
+		});
+	}
+
+	function quantityOptions(data){
+
+		$('#quantity').empty()
+		data.forEach((index, value) => {
+			$('#quantity').append(`<option value=${index.quantity}>${index.quantity}</option>`)
+		});
+
+	}
+	function calculation(size, qty)
+	{
+		let url = `/api/get-price/${size}/${qty}`
+		$.get(url, function(data){
+			$('.prod_price').html(data)
+			$('input[name="price"]').val(data)
+		})
+	}
+	function initialCalculation()
+	{
+		let data = {
+			size : $('#size').val(),
+			quantity : $('#quantity option:selected').val()
+		}
+		calculation(data.size, data.quantity);
+	}
 </script>
 @endsection

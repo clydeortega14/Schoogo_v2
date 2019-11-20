@@ -34,9 +34,8 @@
 				<hr>
 				
 				<div class="form-group row">
-					<label for="size" class="col-md-4 col-form-label text-md-right">
-					 	Product Name 
-					 </label>
+					<label for="size" class="col-md-4 col-form-label text-md-right">Product Name</label>
+
 					<div class="col-md-8">
 						<label style="margin-top: 7px;">{{ $product->name }}</label>
 						<input type="hidden" id="prod-id" value="{{ $product->id}}">
@@ -46,33 +45,24 @@
 				<div class="form-group row">
 					<label for="category-id" class="col-md-4 col-form-label text-md-right"> Category </label>
 					<div class="col-md-8">
-						<select name="category_id" id="category-id" class="form-control">
-							@foreach($product->categories as $category)
-								<option value="{{ $category->id}}" {{ $category->id == $sessionData['category_id'] ? 'selected' : ''}} >{{ $category->name}}</option>
-							@endforeach
-						</select>
+						<label style="margin-top: 7px;">{{ $category->name }}</label>
+						<input type="hidden" id="category-id" value="{{ $category->id}}">
 					</div>
 				</div>
 
 				<div class="form-group row">
-					<label for="size" class="col-md-4 col-form-label text-md-right">Size  </label>
+					<label for="size" class="col-md-4 col-form-label text-md-right">Size</label>
 					<div class="col-md-8">
-						<select name="size" id="size" class="form-control">
-							@foreach($sizes as $size)
-								<option value="{{ $size->id}}" {{ $size->id == $sessionData['size'] ? 'selected' : ''}}>{{ $size->size}}</option>
-							@endforeach
-						</select>
+						<label style="margin-top: 7px;">{{ $size->size }}</label>
+						<input type="hidden" id="size" value="{{ $size->id}}">
 					</div>
 				</div>
 
 				<div class="form-group row">
 					<label for="quantity" class="col-md-4 col-form-label text-md-right">{{ __('Quantity') }}</label>
 					<div class="col-md-8">
-						<select name="quantity" id="quantity" class="form-control">
-							@foreach($product->pricings->unique('quantity') as $pricing)
-								<option value="{{ $pricing->quantity}}"> {{ $pricing->quantity}}</option>
-							@endforeach
-						</select>
+						<label style="margin-top: 7px;">{{ $sessionData['quantity'] }}</label>
+						<input type="hidden" id="quantity" value="{{ $sessionData['quantity']}}">
 					</div>				
 				</div>
 
@@ -89,7 +79,7 @@
 			</div>
 		</div>
 		<br>
-{{-- 		<div class="row">
+		<div class="row">
 			<div class="col-md-12">
 				<p> <strong class="text-danger">WARNING ! </strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, numquam maiores quis! Iusto tenetur, expedita explicabo dolorem fugit ad, inventore voluptas at architecto minus corporis dignissimos nisi tempore doloribus laudantium.</p>
 			</div>
@@ -101,18 +91,14 @@
 				</div>
 			</div>
 		</div>
- --}}		<br>
+		<br>
 		<div class="row justify-content-end">
 			<div class="col-md-4">
 				<div class="float-right">
-					{{-- <button class="btn btn-info btn-block">Continue to checkout</button> --}}
 					<a href="{{ route('order.checkout') }}" class="btn btn-info btn-block">Continue to checkout</a>
 				</div>
 			</div>
 		</div>
-	{{-- </form> --}}
 </div>
 
 @endsection
-
-@include('partials.scripts.information')

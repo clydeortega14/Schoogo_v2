@@ -97,7 +97,7 @@
 		                    <td>
 		                    	<a href="{{ route('orders.show', $order->id) }}">{{ $order->or_number}}</a>
 		                    </td>
-		                    <td>{{ $order->product->name }} - {{ $order->pricing->categories->name}}</td>
+		                    <td>{{ $order->product->name }}</td>
 		                    <td><span class="{{ $order->status->class }}">{{ $order->status->status }}</span></td>
 		                    <td>
 		                      <a href="{{ route('orders.show', $order->id) }}" class="btn btn-primary btn-xs btn-flat">

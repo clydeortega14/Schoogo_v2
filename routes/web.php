@@ -19,6 +19,7 @@ Route::get('/display-product/{id}', 'LandingPageController@viewProduct')->name('
 Route::get('/product-categories/{prodId}', 'LandingPageController@productCategories')->name('product.categories');
 Route::get('/price-calculation/{prodId}/{categoryId}', 'LandingPageController@priceCalculation')->name('price.calculation');
 Route::get('/upload-design/', 'LandingPageController@uploadDesign')->name('upload.design');
+
 Route::post('/checkout', 'LandingPageController@checkout')->name('checkout');
 // Route::get('/product-options', 'LandingPageController@productOptions')->name('product.options');
 Route::get('/order-checkout', 'OrderProductController@checkout')->name('order.checkout');
@@ -45,13 +46,6 @@ Route::middleware(['auth'])->group(function(){
 	Route::resource('size', 'SizesController');
 
 });
-
-/* AJAX */
-Route::get('pricing/{size}/{quantity}', 'LandingPageController@getPrice');
-Route::post('update/size/{id}', 'SizesController@updateSize');
-
-
-
 
 //FILES
 // Route::resource('request-files', 'RequestFilesController');

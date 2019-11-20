@@ -22,27 +22,42 @@ class LandingPageController extends Controller
     	return view('welcome', compact('products'));
     }
     public function uploadDesign(Request $request){
-        $storedData = $request->session()->put('data', $request->all());
+        
+        $data = [
+
+            'product_id' => $request->input('product_id'),
+            'category_id' => $request->input('category_id'),
+            'size' => $request->input('size'),
+            'quantity' => $request->input('quantity'),
+            'price' => $request->input('price'),
+        ];
+        $request->session()->put('data', $data);
         $sizes = Size::all();
+
         return view('upload-design')
-        ->with('sessionData', $request->session()->get('data', $storedData))
+        ->with('sessionData', $request->session()->get('data'))
         ->with('sizes', $sizes);
     }
     public function checkout(Request $request)
     {
-
         $filename = '';
         if($request->hasFile('file')){
             $filename = $this->file_manager->manageFile($request->file('file'), 'files\documents');
         }
+
+
         $request->session()->push('data', $filename);
         $session = $request->session()->get('data');
 
         $product = Product::findOrFail($session['product_id']);
+        $category = Categories::findOrFail($session['category_id']);
+        $size = Size::findOrFail($session['size']);
         $sizes = Size::all();
+
         return view('product-options')
         ->with('product', $product)
-        ->with('sizes', $sizes)
+        ->with('category', $category)
+        ->with('size', $size)
         ->with('sessionData', $request->session()->get('data'));
         
     }
@@ -59,27 +74,28 @@ class LandingPageController extends Controller
     {
         $product = Product::findOrFail($prodId);
         $category = Categories::findOrFail($categoryId);
-        $sizes = Size::where(function($query) use ($category, $prodId){
+
+        $pricings = Pricings::where(function($query) use ($category, $prodId){
             if(count($category->sizes) > 0){
                 $query->where('product_id', $prodId)
-                ->where('category_id', $category->id);
+                ->Where('category_id', $category->id);
             }else{
                 $query->where('product_id', $prodId);
             }
 
         })->get();
-    	return view('product', compact('product', 'sizes', 'category'));
+
+    	return view('product', compact('product', 'pricings', 'category'));
     }
 
-    public function getPrice($prod_id, $category_id, $size, $qty)
+    public function getPrice($size, $qty)
     {
-        $price = Pricings::where('product_id', $prod_id)
-        ->where('category_id', $category_id)
-        ->where('size', $size)
+        $price = Pricings::where('size', $size)
         ->where('quantity', $qty)
         ->first();
         
         $total_price = 0;
+
         if($price){
             $total_price = number_format($price->price, 2); 
             return response()->json($total_price);
@@ -87,10 +103,28 @@ class LandingPageController extends Controller
             return response()->json($total_price);
         }
     }
-    public function getQuantities($sizeId)
-    {
-        $pricings = Pricings::where('size', $sizeId)->get();
 
-        return response()->json($pricings);
+    public function getQuantity($size){
+
+        $size = Pricings::where('size', $size)->get();
+
+        return response()->json($size);
+    }
+    public function getSize($prodId, $categoryId)
+    {
+        $category = Categories::findOrFail($categoryId);
+        $sizes = Size::where(function($query) use ($category, $prodId){
+
+            if(count($category->sizes) > 0){
+                $query->where('product_id', $prodId)
+                ->where('category_id', $category->id);
+            }else{
+
+                $query->where('product_id', $prodId);
+            }
+
+        })->get();
+
+        return response()->json($sizes);
     }
 }
