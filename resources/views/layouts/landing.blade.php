@@ -10,13 +10,13 @@
 	<link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 	<!-- Bootstrap -->
 	{{-- <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" type="text/css"> --}}
-  <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-grid.min.css') }}" type="text/css">
-  <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-reboot.min.css') }}" type="text/css">
-  <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css">
+  <link rel="stylesheet" href="/assets/css/bootstrap-grid.min.css" type="text/css">
+  <link rel="stylesheet" href="/assets/css/bootstrap-reboot.min.css" type="text/css">
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css" type="text/css">
 
 	<!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
-  <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+  {{-- <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
     
     <style>
     /* Remove the navbar's default rounded borders and increase the bottom margin */ 
@@ -37,7 +37,7 @@
     }
   </style>
 
-</head>
+</head> --}}
 <body>
 {{-- 
 <div class="jumbotron">
@@ -113,9 +113,9 @@
 </div> --}}
 
 <!-- SCRIPTS -->
-<script src="{{ asset('js/jquery-3.4.1.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('assets/js/bootstrap.bundle.min.js')}}" type="text/javascript"></script>
-<script src="{{ asset('assets/js/bootstrap.min.js')}}" type="text/javascript"></script>
+<script src="/js/jquery-3.4.1.min.js" type="text/javascript"></script>
+<script src="/assets/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+<script src="/assets/js/bootstrap.min.js" type="text/javascript"></script>
 @yield('custom_js')
 
 </body>
