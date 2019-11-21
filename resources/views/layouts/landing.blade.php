@@ -9,7 +9,10 @@
 	<!-- FONT AWESOME -->
 	<link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 	<!-- Bootstrap -->
-	<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" type="text/css">
+	{{-- <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" type="text/css"> --}}
+  <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-grid.min.css') }}" type="text/css">
+  <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-reboot.min.css') }}" type="text/css">
+  <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css">
 
 	<!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
@@ -110,9 +113,9 @@
 </div> --}}
 
 <!-- SCRIPTS -->
-<script src="{{ asset('js/jquery-v3.4.1.js') }}"></script>
-<script src="{{ asset('js/jquery-popper.js') }}"></script>
-<script src="{{ asset('js/jquery-bootstrap.js') }}"></script>
+<script src="{{ asset('js/jquery-3.4.1.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/js/bootstrap.bundle.min.js')}}" type="text/javascript"></script>
+<script src="{{ asset('assets/js/bootstrap.min.js')}}" type="text/javascript"></script>
 @yield('custom_js')
 
 </body>

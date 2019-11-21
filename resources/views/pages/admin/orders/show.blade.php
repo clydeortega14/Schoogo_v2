@@ -118,7 +118,6 @@
               <ul class="nav nav-stacked">
                 <li class="text-center"><h3>Order Summary</h3></li>
                 <li><a href="#">Product <span class="pull-right">{{ $order->product->name }}</span></a></li>
-                {{-- <li><a href="#">Category <span class="pull-right">{{ $order->pricing->categories->name }}</span></a></li> --}}
                 <li><a href="#">Size <span class="pull-right">{{ $order->pricing->sizes->size}}</span></a></li>
                 <li><a href="#">Quantity <span class="pull-right">{{ $order->pricing->quantity }}</span></a></li>
                 <li>
