@@ -41,7 +41,7 @@
 				  <li class="list-group-item d-flex justify-content-between align-items-center">
 				    Artwork
 				    <span>
-				    	<img src="{{ asset('storage/files/documents/'.$session[0]) }}" alt="" class="img-fluid mx-auto d-block" height="100" width="100">
+				    	<img src="{{ asset('/uploads/files/documents/'.$session[0]) }}" alt="" class="img-fluid mx-auto d-block" height="100" width="100">
 				    </span>
 				  </li>
 				  <li class="list-group-item d-flex justify-content-between align-items-center">

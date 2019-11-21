@@ -26,7 +26,7 @@
 				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 py-2">
 					<div class="card h-100">
 						<a href="{{ url('/price-calculation/'.$product->id.'/'.$category->id) }}">
-							<img src="{{ $category->image == null ? '/img/portfolio/thumbnails/1.jpg' : asset('storage/images/categories/'.$category->image)  }}" alt="..." class="mx-auto d-block img-fluid">
+							<img src="{{ $category->image == null ? '/img/portfolio/thumbnails/1.jpg' : asset('/uploads/images/categories/'.$category->image)  }}" alt="..." class="mx-auto d-block img-fluid">
 						</a>
 						<div class="card-body">
 							

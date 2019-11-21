@@ -28,7 +28,7 @@
 					<div class="col-sm-4 py-2">
 						<div class="card h-100">
 							<a href="{{ route('display.product', $product->id) }}">
-								<img src="{{ $product->image == null ? '/img/portfolio/thumbnails/1.jpg' : asset('storage/images/products/'. $product->image) }}" alt="..." class="card-img-top" width="300" height="200">
+								<img src="{{ $product->image == null ? '/img/portfolio/thumbnails/1.jpg' : asset('/uploads/images/products/'. $product->image) }}" alt="..." class="card-img-top" width="300" height="200">
 							</a>
 							<div class="card-body">
 								

@@ -42,7 +42,7 @@ class LandingPageController extends Controller
     {
         $filename = '';
         if($request->hasFile('file')){
-            $filename = $this->file_manager->manageFile($request->file('file'), 'files\documents');
+            $filename = $this->file_manager->manageFile($request->file('file'), 'files/documents');
         }
 
 

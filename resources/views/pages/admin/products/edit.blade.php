@@ -23,7 +23,7 @@
         		@csrf
 	                <div class="box box-primary">
 	                    <div class="box-body">
-	                    	<img src="{{ asset('storage/images/products/'.$product->image) }}" alt="..." height="150" width="150" class="img-fluid mx-auto d-block">
+	                    	<img src="{{ $product->image == null ? '/img/portfolio/thumnails/1.jpg' : asset('/uploads/images/products/'.$product->image) }}" alt="..." height="150" width="150" class="img-fluid mx-auto d-block">
 	                        <div class="form-group">
 	                            <label for="">Name</label>
 	                            <input type="text" name="name" class="form-control" value="{{ $product->name }}" required>
@@ -75,7 +75,7 @@
 									<tr>
 										<td>
 											<a href="#">
-												<img src="{{ $category->image == null ? '/img/portfolio/thumbnails/1.jpg' : asset('storage/images/categories/'.$category->image)}}" alt="..." class="img-fluid mx-auto d-block" height="50" width="50">
+												<img src="{{ $category->image == null ? '/img/portfolio/thumbnails/1.jpg' : asset('/uploads/images/categories/'.$category->image)}}" alt="..." class="img-fluid mx-auto d-block" height="50" width="50">
 											</a>
 										</td>
 										<td>{{$category->name}}</td>

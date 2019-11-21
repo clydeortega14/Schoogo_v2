@@ -36,7 +36,7 @@
                             @foreach($products as $product)
                                 <tr>
                                     <td>
-                                        <img src="{{ $product->image == null ? '/img/portfolio/thumbnails/1.jpg' : asset('storage/images/products/'. $product->image) }}" alt="..." height="50" width="50">
+                                        <img src="{{ $product->image == null ? '/img/portfolio/thumbnails/1.jpg' : asset('/uploads/images/products/'. $product->image) }}" alt="..." height="50" width="50">
                                     </td>
                                     <td>{{ $product->name}}</td>
                                     <td>{{ $product->description}}</td>

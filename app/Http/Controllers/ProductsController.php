@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Size;
+use App\Service\FileManager;
 use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
+    public function __construct()
+    {
+        $this->file_manager = new FileManager;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -46,9 +51,7 @@ class ProductsController extends Controller
 
             if($request->hasFile('image')){
 
-                $file = $request->file('image');
-                $filename = rand().".".$file->getClientOriginalExtension();
-                $file->storeAs('images\products', $filename);
+                $this->file_manager->manageFile($request->file('image'), 'images/products');
             }
 
             $product = Product::create([
@@ -114,9 +117,7 @@ class ProductsController extends Controller
 
             if($request->hasFile('image')){
 
-                $file = $request->file('image');
-                $filename = rand().".".$file->getClientOriginalExtension();
-                $file->storeAs('images\products', $filename);
+                $filename = $this->file_manager->manageFile($request->file('image'), 'images/products');
             }
 
             $product->update([

@@ -50,7 +50,7 @@ class CategoriesController extends Controller
 
             if($request->hasFile('image')){
 
-                $filename = $this->file_manager->manageFile($request->file('image'), 'images\categories');
+                $filename = $this->file_manager->manageFile($request->file('image'), 'images/categories');
             }
 
             Categories::create($this->category->data($request->toArray(), $filename));
@@ -108,7 +108,7 @@ class CategoriesController extends Controller
 
             if($request->hasFile('image')){
 
-                $filename = $this->file_manager->manageFile($request->file('image'), 'images\categories');
+                $filename = $this->file_manager->manageFile($request->file('image'), 'images/categories');
             }
 
             $category->update($this->category->data($request->toArray(), $filename));

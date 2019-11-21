@@ -25,7 +25,7 @@
 			<div class="col-sm-12 col-md-6">
 				<div class="card h-100">
 					<a href="#">
-						<img src="{{ $category->image == null ? '/img/portfolio/thumbnails/1.jpg' : asset('storage/images/categories/'.$category->image)  }}" alt="..." class="mx-auto d-block img-fluid">
+						<img src="{{ $category->image == null ? '/img/portfolio/thumbnails/1.jpg' : asset('/uploads/images/categories/'.$category->image)  }}" alt="..." class="mx-auto d-block img-fluid">
 					</a>
 					<div class="card-body">
 						

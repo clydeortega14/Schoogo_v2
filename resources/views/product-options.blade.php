@@ -25,7 +25,7 @@
 				<div class="card">
 
 					<div class="card-body">
-						<img src="{{ asset('storage/files/documents/'. $sessionData[0])}}" alt="" class="img-fluid mx-auto d-block" height="200" width="200">
+						<img src="{{ asset('/uploads/files/documents/'. $sessionData[0])}}" alt="" class="img-fluid mx-auto d-block" height="200" width="200">
 					</div>
 				</div>
 			</div>
