@@ -7,6 +7,10 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
+use Session;
 
 class RegisterController extends Controller
 {
@@ -85,5 +89,24 @@ class RegisterController extends Controller
             'role_id' => 2
 
         ]);
+    }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+            
+        $this->guard()->login($user);
+
+        if(Session::has('oldUrl')){
+            
+            $oldUrl = Session::get('oldUrl');
+            Session::forget('oldUrl');
+            return redirect()->to($oldUrl);
+
+        }
+
+        return $this->registered($request, $user) ? : redirect($this->redirectPath());
     }
 }
