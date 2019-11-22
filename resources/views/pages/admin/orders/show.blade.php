@@ -39,74 +39,33 @@
 							</form>
 						</div>
 					</div>
-					
-					
 				</div>
 				<div class="box-body">
 					<form class="form-horizontal">
-					<div class="form-group">
-	                  <label class="col-sm-2 control-label">Firstname</label>
+						<div class="form-group">
+		                  <label class="col-sm-2 control-label">Complete Address</label>
 
-	                  <div class="col-sm-8">
-	                    <input type="text" value="{{ $order->deliverTo->firstname }}" class="form-control" readonly>
-	                  </div>
-	                </div>
+		                  <div class="col-sm-8">
+		                  	<textarea type="text" name="complete_address" id="complete-address" class="form-control" readonly>{{ $order->deliverTo->complete_address }}</textarea>
+		                  </div>
+		                </div>
 
-	                <div class="form-group">
-	                  <label class="col-sm-2 control-label">Lastname</label>
+		                <div class="form-group">
+		                  <label class="col-sm-2 control-label">Contact Person</label>
 
-	                  <div class="col-sm-8">
-	                    <input type="text" value="{{ $order->deliverTo->lastname }}" class="form-control" readonly>
-	                  </div>
-	                </div>
+		                  <div class="col-sm-8">
+		                    <input type="text" value="{{ $order->deliverTo->contact_person }}" class="form-control" readonly>
+		                  </div>
+		                </div>
 
-	                <div class="form-group">
-	                  <label class="col-sm-2 control-label">Email</label>
+		                <div class="form-group">
+		                  <label class="col-sm-2 control-label">Contact Number</label>
 
-	                  <div class="col-sm-8">
-	                    <input type="text" value="{{ $order->deliverTo->email }}" class="form-control" readonly>
-	                  </div>
-	                </div>
+		                  <div class="col-sm-8">
+		                    <input type="text" value="{{ $order->deliverTo->contact_number }}" class="form-control" readonly>
+		                  </div>
+		                </div>
 
-	                <div class="form-group">
-	                  <label class="col-sm-2 control-label">Contact</label>
-
-	                  <div class="col-sm-8">
-	                    <input type="text" value="{{ $order->deliverTo->contact }}" class="form-control" readonly>
-	                  </div>
-	                </div>
-
-	                <div class="form-group">
-	                  <label class="col-sm-2 control-label">Country</label>
-
-	                  <div class="col-sm-8">
-	                    <input type="text" value="{{ $order->deliverTo->country }}" class="form-control" readonly>
-	                  </div>
-	                </div>
-
-	                <div class="form-group">
-	                  <label class="col-sm-2 control-label">State</label>
-
-	                  <div class="col-sm-8">
-	                    <input type="text" value="{{ $order->deliverTo->state }}" class="form-control" readonly>
-	                  </div>
-	                </div>
-
-	                <div class="form-group">
-	                  <label class="col-sm-2 control-label">City</label>
-
-	                  <div class="col-sm-8">
-	                    <input type="text" value="{{ $order->deliverTo->city }}" class="form-control" readonly>
-	                  </div>
-	                </div>
-
-	                <div class="form-group">
-	                  <label class="col-sm-2 control-label">Address</label>
-
-	                  <div class="col-sm-8">
-	                    <input type="text" value="{{ $order->deliverTo->street }}" class="form-control" readonly>
-	                  </div>
-	                </div>
 	                </form>
 				</div>
 			</div>
@@ -117,12 +76,22 @@
             <div class="box-footer no-padding">
               <ul class="nav nav-stacked">
                 <li class="text-center"><h3>Order Summary</h3></li>
+                <li>
+                	<a href="#">Artwork 
+	                	<span class="pull-right">
+	                		<img src="{{ asset('/uploads/files/documents/'. $order->file)  }}" alt="..." class="img-fluid mx-auto d-block">
+	                	</span>
+                	</a>
+                </li>
                 <li><a href="#">Product <span class="pull-right">{{ $order->product->name }}</span></a></li>
                 <li><a href="#">Size <span class="pull-right">{{ $order->pricing->sizes->size}}</span></a></li>
                 <li><a href="#">Quantity <span class="pull-right">{{ $order->pricing->quantity }}</span></a></li>
                 <li>
-                	<span class="text-center"><h3>Total Price : PHP {{ $order->pricing->pricingFormattedPrice() }}</h3>
-                	</span>
+                	<a href="#"><h3>Total Price 
+                		<span class="pull-right"> 
+                			PHP {{ $order->pricing->pricingFormattedPrice() }} </h3>
+                		</span>
+                	</a>
                 </li>
               </ul>
             </div>
