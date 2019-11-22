@@ -29,7 +29,7 @@ class HomeController extends Controller
 
         if($user->role_id == 1){
 
-            // $orders = Order::orderBy('created_at', 'desc')->get();
+            $orders = Order::orderBy('created_at', 'desc')->get();
             $products = Product::where('status', true)->get();
             return view('home', compact('orders', 'products'));
             
