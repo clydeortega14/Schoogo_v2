@@ -1,5 +1,7 @@
 @extends('layouts.landing')
 
+@section('title', 'Login Page')
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -65,6 +67,8 @@
                             </div>
                         </div>
                     </form>
+
+                    <p>Don't have an account ? <a href="{{ route('register') }}">Sign Up</a></p>
                 </div>
             </div>
         </div>

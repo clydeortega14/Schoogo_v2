@@ -48,9 +48,18 @@ class OrdersController extends Controller
      */
     public function show($id)
     {
+        $user  = auth()->user();
+
         $order = Order::findOrFail($id);
         $statuses = OrderStatus::all();
-        return view('pages.admin.orders.show', compact('order', 'statuses'));
+
+        if($user->role_id == 1){
+
+            return view('pages.admin.orders.show', compact('order', 'statuses'));
+        }else{
+
+            return view('pages.users.show', compact('order'));
+        }
     }
 
     /**

@@ -10,13 +10,6 @@ class DeliverAddress extends Model
     protected $table = 'deliver_addresses';
     protected $fillable = [
 
-    	'firstname',
-    	'lastname',
-    	'email',
-    	'contact',
-    	'country',
-    	'state',
-    	'city',
-    	'street'
+    	'complete_address', 'contact_person', 'contact_number'
     ];
 }

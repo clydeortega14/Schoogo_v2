@@ -15,14 +15,9 @@ class CreateDeliverAddressesTable extends Migration
     {
         Schema::create('deliver_addresses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('email');
-            $table->string('contact');
-            $table->string('country');
-            $table->string('state');
-            $table->string('city');
-            $table->string('street');
+            $table->text('complete_address');
+            $table->string('contact_person');
+            $table->string('contact_number');
             $table->timestamps();
         });
     }

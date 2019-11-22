@@ -25,8 +25,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $orders = Order::orderBy('created_at', 'desc')->get();
-        $products = Product::where('status', true)->get();
-        return view('home', compact('orders', 'products'));
+        $user = auth()->user();
+
+        if($user->role_id == 1){
+
+            $orders = Order::orderBy('created_at', 'desc')->get();
+            $products = Product::where('status', true)->get();
+            return view('home', compact('orders', 'products'));
+            
+        }else if($user->role_id == 2){
+
+            $orders = Order::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
+            return view('pages.users.profile', compact('orders'));
+        } 
     }
 }

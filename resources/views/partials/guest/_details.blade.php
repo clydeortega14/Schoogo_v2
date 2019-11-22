@@ -1,43 +1,14 @@
 <div class="col-xs-12 col-md-8">
 	<div class="form-group">	
-		<input type="text" name="firstname" class="form-control" placeholder="Firstname" required>
+		<textarea name="complete_address" id="complete-address" class="form-control" placeholder="Enter Complete Address" required></textarea>
 	</div>
 
 	<div class="form-group">	
-		<input type="text" name="lastname" class="form-control" placeholder="Lastname" required>
+		<input type="text" name="contact_person" class="form-control" placeholder="Enter Contact Person" required>
 	</div>
 
 	<div class="form-group">	
-		<input type="email" name="email" class="form-control" placeholder="Email" required>
-	</div>
-
-
-	<div class="form-group">	
-		<input type="text" name="contact" class="form-control" placeholder="Mobile Number" required>
-	</div>
-
-	<div class="form-group">	
-		<select name="country" class="form-control" required>
-			<option value=""> Select Country </option>
-			<option value="philippines"> Philippines </option>
-		</select>
-	</div>
-
-	<div class="form-group">	
-		<select name="state" class="form-control" required>
-			<option value=""> Select State </option>
-			<option value="Abra"> Abra</option>
-			<option value="Agusan Del Sur"> Agusan Del Sur </option>
-			<option value="Cebu"> Cebu </option>
-		</select>
-	</div>
-
-	<div class="form-group">	
-		<input type="text" name="city" class="form-control" placeholder="City" >
-	</div>
-
-	<div class="form-group">	
-		<input type="text" name="street" class="form-control" placeholder="Street" required>
+		<input type="text" name="contact_number" class="form-control" placeholder="Enter Contact Number" required>
 	</div>
 </div>
 

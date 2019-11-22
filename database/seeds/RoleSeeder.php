@@ -14,8 +14,8 @@ class RoleSeeder extends Seeder
     {
         $roles = [
 
-        	['name' => 'admin', 'class' => 'label label-success'],
-        	['name' => 'member', 'class' => 'label label-primary'],
+        	['name' => 'admin', 'class' => 'badge badge-success'],
+        	['name' => 'member', 'class' => 'badge bade-primary'],
         ];
 
         foreach($roles as $role){

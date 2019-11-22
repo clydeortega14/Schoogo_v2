@@ -12,12 +12,16 @@ class Order extends Model
     	'or_number', 
     	'product_id', 
     	'pricing_id', 
-    	'paper_id', 
+    	'user_id', 
     	'file', 
     	'price', 
     	'deliver_to',
     	'order_status_id'
     ];
+    public function presentPrice()
+    {
+        return number_format($this->price, 2);
+    }
 
     public function product()
     {
@@ -34,5 +38,9 @@ class Order extends Model
     public function deliverTo()
     {
         return $this->hasOne('App\DeliverAddress', 'id', 'deliver_to');
+    }
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'user_id', 'id');
     }
 }

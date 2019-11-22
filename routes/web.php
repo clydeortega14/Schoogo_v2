@@ -12,17 +12,22 @@
 */
 
 Route::get('/', 'LandingPageController@index');
+
 Route::get('/about-us', 'LandingPageController@about');
 
 // FOR GUEST
 Route::get('/display-product/{id}', 'LandingPageController@viewProduct')->name('display.product');
+
 Route::get('/product-categories/{prodId}', 'LandingPageController@productCategories')->name('product.categories');
+
 Route::get('/price-calculation/{prodId}/{categoryId}', 'LandingPageController@priceCalculation')->name('price.calculation');
+
 Route::get('/upload-design/', 'LandingPageController@uploadDesign')->name('upload.design');
 
 Route::post('/checkout', 'LandingPageController@checkout')->name('checkout');
-// Route::get('/product-options', 'LandingPageController@productOptions')->name('product.options');
-Route::get('/order-checkout', 'OrderProductController@checkout')->name('order.checkout');
+
+Route::get('/order-checkout', 'OrderProductController@checkout')->middleware('auth')->name('order.checkout');
+
 Route::post('/order-now/{id}', 'OrderProductController@orderNow')->name('order.now');
 
 
@@ -42,16 +47,7 @@ Route::middleware(['auth'])->group(function(){
 	Route::resource('papers', 'PapersController');
 	/*Orders Route*/
 	Route::resource('orders', 'OrdersController');
-
+	/* Size Route */
 	Route::resource('size', 'SizesController');
 
 });
-
-//FILES
-// Route::resource('request-files', 'RequestFilesController');
-
-// Route::get('view/{id}', 'RequestFilesController@edit')->name('view');
-// Route::get('print/file/{id}', 'RequestFilesController@show')->name('print.file');
-// Route::get('download/file/{id}', 'RequestFilesController@download')->name('download.file');
-// Route::put('compute/request/{id}', 'RequestFilesController@update')->name('compute.request.price');
-// Route::put('update/doc/status/{id}', 'RequestFilesController@updateDocStatus')->name('update.doc.status');

@@ -12,9 +12,9 @@ class OrdersStatusSeeder extends Seeder
      */
     public function run()
     {
-        OrderStatus::create(['status' => 'pending', 'class' => 'label label-warning']);
-        OrderStatus::create(['status' => 'in process', 'class' => 'label label-primary']);
-        OrderStatus::create(['status' => 'shipping', 'class' => 'label label-info']);
-        OrderStatus::create(['status' => 'delivered', 'class' => 'label label-success']);
+        OrderStatus::create(['status' => 'pending', 'class' => 'badge badge-warning']);
+        OrderStatus::create(['status' => 'in process', 'class' => 'badge badge-primary']);
+        OrderStatus::create(['status' => 'shipping', 'class' => 'badge badge-info']);
+        OrderStatus::create(['status' => 'delivered', 'class' => 'badge badge-success']);
     }
 }

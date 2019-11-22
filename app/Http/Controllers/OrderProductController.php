@@ -49,7 +49,7 @@ class OrderProductController extends Controller
                     'or_number' => $this->genOrNumber(),
                     'product_id' => $request->input('product_id'),
                     'pricing_id' => $pricing->id,
-                    // 'paper_id' => $request->input('paper_id'),
+                    'user_id' => auth()->user()->id,
                     'file' => $session[0],
                     'price' => $pricing->price,
                     'deliver_to' => $deliver_address->id,
@@ -77,14 +77,9 @@ class OrderProductController extends Controller
     {
         return DeliverAddress::create([
 
-            'firstname' => $data['firstname'],
-            'lastname' => $data['lastname'],
-            'email' => $data['email'],
-            'contact' => $data['contact'],
-            'country' => $data['country'],
-            'state' => $data['state'],
-            'city' => $data['city'],
-            'street' => $data['street']
+            'complete_address' => $data['complete_address'],
+            'contact_person' => $data['contact_person'],
+            'contact_number' => $data['contact_number']
         ]);
     }
 
@@ -112,23 +107,5 @@ class OrderProductController extends Controller
     protected function getPricing($size, $qty)
     {
         return Pricings::where('size', $size)->where('quantity', $qty)->first();
-    }
-    protected function orderData($prodId, $priceId, $sizeId, $paperId, $qtyId, $price)
-    {
-        return [
-
-            'product_id' => $prodId,
-            'pricing'    => $priceId,
-            'size_id'    => $sizeId,
-            'paper_id'   => $paperId,
-            'quantity'   => $qtyId,
-            'price'      => $price
-       ];
-    }
-
-    protected function computeTotalPrice($price, $paper)
-    {
-        return $price + $paper;
-    }
-    
+    }  
 }
