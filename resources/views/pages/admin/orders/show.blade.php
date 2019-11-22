@@ -67,6 +67,15 @@
 		                </div>
 
 	                </form>
+					<br>
+					<br>
+
+	                <div class="row">
+	                	<div class="col-md-6">
+	                		<h2>Artwork</h2>
+	                		<img src="{{ asset('/uploads/files/documents/'. $order->file)  }}" alt="..." height="250" width="250" class="img-fluid mx-auto d-block">
+	                	</div>
+	                </div>
 				</div>
 			</div>
 		</div>
@@ -76,13 +85,6 @@
             <div class="box-footer no-padding">
               <ul class="nav nav-stacked">
                 <li class="text-center"><h3>Order Summary</h3></li>
-                <li>
-                	<a href="#">Artwork 
-	                	<span class="pull-right">
-	                		<img src="{{ asset('/uploads/files/documents/'. $order->file)  }}" alt="..." class="img-fluid mx-auto d-block">
-	                	</span>
-                	</a>
-                </li>
                 <li><a href="#">Product <span class="pull-right">{{ $order->product->name }}</span></a></li>
                 <li><a href="#">Size <span class="pull-right">{{ $order->pricing->sizes->size}}</span></a></li>
                 <li><a href="#">Quantity <span class="pull-right">{{ $order->pricing->quantity }}</span></a></li>
