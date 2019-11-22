@@ -96,4 +96,16 @@ class OrdersController extends Controller
     {
         //
     }
+    public function viewFile($id)
+    {
+        $order = Order::findOrFail($id);
+        $pathToFile = public_path('/uploads/files/documents/'.$order->file); 
+        return response()->file($pathToFile);
+    }
+    public function downloadFile($id)
+    {
+        $order = Order::findOrFail($id);
+        $path = public_path('/uploads/files/documents/'.$order->file);
+        return response()->download($path);
+    }
 }

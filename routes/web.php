@@ -49,5 +49,8 @@ Route::middleware(['auth'])->group(function(){
 	Route::resource('orders', 'OrdersController');
 	/* Size Route */
 	Route::resource('size', 'SizesController');
+	/* VIEW IMAGE*/
+	Route::get('/view-file/{id}', 'OrdersController@viewFile')->name('view.file');
+	Route::get('/download-file/{id}', 'OrdersController@downloadFile')->name('download.file');
 
 });

@@ -73,7 +73,13 @@
 	                <div class="row">
 	                	<div class="col-md-6">
 	                		<h2>Artwork</h2>
-	                		<img src="{{ asset('/uploads/files/documents/'. $order->file)  }}" alt="..." height="250" width="250" class="img-fluid mx-auto d-block">
+	                		<a href="{{ route('view.file', $order->id) }}">
+	                			<img src="{{ asset('/uploads/files/documents/'. $order->file)  }}" alt="..." height="250" width="250" class="img-fluid mx-auto d-block">
+	                		</a>
+	                		<br>
+	                		<br>
+	                		<a href="{{ route('view.file', $order->id) }}" class="btn btn-primary btn-flat">View File</a>
+	                		<a href="{{ route('download.file', $order->id) }}" class="btn btn-warning btn-flat">Download File</a>
 	                	</div>
 	                </div>
 				</div>
