@@ -18,8 +18,12 @@ class LandingPageController extends Controller
     }
     public function index()
     {
-    	$products = Product::all();
-    	return view('welcome', compact('products'));
+    	return view('welcome');
+    }
+    public function getProducts()
+    {
+        $products = Product::all();
+        return view('products', compact('products'));
     }
     public function uploadDesign(Request $request){
         

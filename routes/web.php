@@ -16,6 +16,8 @@ Route::get('/', 'LandingPageController@index');
 Route::get('/about-us', 'LandingPageController@about');
 
 // FOR GUEST
+Route::get('/get-products', 'LandingPageController@getProducts')->name('get.products');
+
 Route::get('/display-product/{id}', 'LandingPageController@viewProduct')->name('display.product');
 
 Route::get('/product-categories/{prodId}', 'LandingPageController@productCategories')->name('product.categories');
