@@ -63,29 +63,6 @@
 
     @yield('content')
 
-{{--     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-12">
-          <div id="header">
-            <h1 class="text-center">Inksite <br>
-              Motoprint
-            </h1>
-
-            <h4 class="text-center">IF YOU CAN THINK IT, WE CAN INK IT</h4>
-
-            <div id="contact">
-              <h4>CONTACT DETAILS</h4>
-              <ul class="list-unstyled">
-                <li> <i class="fa fa-phone"></i> 09272246882 / 09179616083 / 09065265461</li>
-                <li> <i class="fa fa-envelope"></i> inksitemotoprint@gmail.com</li>
-                <li> <i class="fas fa-globe"></i> inksitemotoprint.com</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> --}}
-
 <script src="/js/jquery-3.4.1.min.js" type="text/javascript"></script>
 <script src="/assets/js/bootstrap.bundle.min.js" type="text/javascript"></script>
 <script src="/assets/js/bootstrap.min.js" type="text/javascript"></script>

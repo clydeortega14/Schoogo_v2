@@ -13,8 +13,8 @@
 				<hr>
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
-						{{-- <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li> --}}
-						<li class="breadcrumb-item"><a href="{{ url('/') }}">Products</a></li>
+						<li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+						<li class="breadcrumb-item"><a href="{{ route('get.products') }}">Products</a></li>
 						<li class="breadcrumb-item active" aria-current="page">Product Categories</li>
 					</ol>
 				</nav>
@@ -30,7 +30,7 @@
 						</a>
 						<div class="card-body">
 							
-							<h6 class="card-title">{{ $category->name }}</h6>
+							<h5 class="card-title">{{ $category->name }}</h5>
 						</div>
 						<div class="card-footer">
 							<a href="{{ url('/price-calculation/'.$product->id.'/'.$category->id) }}" class="btn btn-outline-info">Select Category</a>

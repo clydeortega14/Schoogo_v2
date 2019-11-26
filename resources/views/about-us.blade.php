@@ -14,8 +14,8 @@
   <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
-  <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Lobster|Merriweather+Sans:400,700" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Lobster|Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
 
   <!-- Plugin CSS -->
   <link href="/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
@@ -33,12 +33,15 @@
   <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
         <div class="container">
-          <a href="{{ url('/') }}" class="navbar-brand js-scroll-trigger" href="#page-top">Inksite Motoprint</a>
+          <a href="{{ url('/') }}" class="navbar-brand js-scroll-trigger" href="#page-top">Home</a>
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#products">Products</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="#mission">Mission</a>
                     </li>
@@ -46,26 +49,43 @@
                         <a class="nav-link js-scroll-trigger" href="#vission">Vision</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#services">Sevicers Offered</a>
+                        <a class="nav-link js-scroll-trigger" href="#services">Sevices</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#contact">Contact Us</a>
+                        <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
                     </li>
+                    @guest
+                        <li class="nav-item">
+                        <a href="{{ route('login') }}" class="nav-link">Sign In</a>
+                        </li>
+                        @if(Route::has('register'))
+                            <li class="nav-item">
+                                <a href="{{  route('register') }}" class="nav-link">Sign Up</a>
+                            </li>
+                        @endif
+                    @else
+                        <li class="nav-item dropdown">
+                          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                              {{ Auth::user()->firstname }} {{ Auth()->user()->lastname }} <span class="caret"></span>
+                          </a>
+
+                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="{{ route('home') }}">Orders</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="{{ route('logout') }}"
+                                 onclick="event.preventDefault();
+                                               document.getElementById('logout-form').submit();">
+                                  {{ __('Logout') }}
+                              </a>
+
+                              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                  @csrf
+                              </form>
+                          </div>
+                        </li>
+                    @endguest
                 </ul>
             </div>
-        </div>
-
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav mr-auto my-2 my-lg-0">
-                <li class="nav-item">
-                    <a href="{{ route('login') }}" class="nav-link">Sign In</a>
-                </li>
-                @if(Route::has('register'))
-                    <li class="nav-item">
-                        <a href="{{  route('register') }}" class="nav-link">Sign Up</a>
-                    </li>
-                @endif
-            </ul>
         </div>
     </nav>
 
@@ -73,16 +93,48 @@
     <header class="masthead">
         <div class="container h-100">
             <div class="row h-100 align-items-center justify-content-center text-center">
+
                 <div class="col-lg-10 align-self-end">
-                    <h1 class="text-uppercase text-white font-weight-bold">if you can think it, we can ink it</h1>
+                    <h1 class="text-white font-weight-bold">Inksite <br>Motoprint</h1>
                 </div>
+
                 <div class="col-lg-8 align-self-baseline">
-                    {{-- <p class="text-white-75 font-weight-light mb-5">Helps you print your documents consistently and effectively</p> --}}
-                    <a class="btn btn-primary btn-xl js-scroll-trigger learn-more mt-5" href="#mission">Learn More</a>
+                    <p class="text-uppercase text-white-75 font-weight-light mb-5">if you can think it, we can ink it.</p>
+                    <a class="btn btn-primary btn-xl js-scroll-trigger learn-more" href="#products">Learn More</a>
                 </div>
             </div>
         </div>
     </header>
+
+    <section class="page-section" id="products">
+        <div class="container">
+            <h2 class="text-center mt-0">Sample Products</h2>
+            <hr class="divider my-4">
+            <div class="row justify-content-center">
+                @foreach($products as $product)
+                    <div class="col-sm-4 py-2">
+                        <div class="card h-100">
+                            <a href="{{ route('product.categories', $product->id) }}">
+                                <img src="{{ $product->image == null ? '/img/portfolio/thumbnails/1.jpg' : asset('/uploads/images/products/'. $product->image) }}" alt="..." class="card-img-top" width="300" height="200">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $product->name }}</h5>
+                                <p class="card-text">{{ $product->description}}</p>
+                            </div>
+
+                            <div class="card-footer">
+                                <a href="{{ route('product.categories', $product->id) }}" class="btn btn-outline-info">Select</a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+                <a href="{{ route('get.products') }}" class="btn btn-outline-info mt-5">View More</a>
+            </div>
+            <br>
+            <br>
+            
+        </div>
+    </section>
 
     <section class="page-section" id="mission">
         <div class="container">
@@ -109,13 +161,13 @@
   <!-- Services Section -->
     <section class="page-section" id="services">
         <div class="container">
-            <h2 class="text-center mt-0">Printing Services Offered</h2>
+            <h2 class="text-center mt-0">Services Offered</h2>
             <hr class="divider my-4">
             <div class="row">
                 <div class="col-lg-12 col-md-6 text-center">
                     <div class="mt-2">
-                        <p class="text-muted mb-0">Business Forums, Brochures, Flyers, Magazines, Calendar, Yearbook, Banners, Hard Bound and Soft bound and ring bind, Tarpaulin, Posters, Labels, Stickers, Invitation Card
-                        T-shirt Printing, Bag Printing, ID Lace Printing</p>
+                        <p class="text-muted mb-0">Business Forums / Brochures / Flyers / Magazines / Calendar / Yearbook / Banners / Hard Bound and Soft bound and ring bind / Tarpaulin / Posters / Labels / Stickers /Invitation Card /
+                        T-shirt Printing /Bag Printing / ID Lace Printing</p>
                     </div>
                 </div>
             </div>
@@ -127,7 +179,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
-                    <h2 class="mt-0">Let's Get In Touch!</h2>
+                    <h2 class="mt-0">Contact Details</h2>
                     <hr class="divider my-4">
                     {{-- <p class="text-muted mb-5">Ready to start your next project with us? Give us a call or send us an email and we will get back to you as soon as possible!</p> --}}
                 </div>
@@ -136,19 +188,17 @@
                 <div class="col-lg-4 ml-auto text-center mb-5 mb-lg-0">
                     <i class="fas fa-phone fa-3x mb-3 text-muted"></i>
                     <ul class="list-unstyled">
-                        <li class="list-item">09272246882</li>
-                        <hr>
-                        <li class="list-item">09179616083</li>
-                        <hr>
-                        <li class="list-item">09065265461</li>
-                        <hr>
-                        <li class="list-item">272-8169</li>
+                        <li class="list-inline-item">09272246882 / 09179616083 / 09065265461 / 272-8169</li>
                     </ul>
                 </div>
                 <div class="col-lg-4 mr-auto text-center">
                     <i class="fas fa-envelope fa-3x mb-3 text-muted"></i>
                     <!-- Make sure to change the email address in anchor text AND the link below! -->
                     <a class="d-block" href="mailto:contact@yourwebsite.com">inksitemotoprint@gmail.com</a>
+                </div>
+                <div class="col-lg-4 mr-auto text-center">
+                    <i class="fas fa-globe fa-3x mb-3 text-muted"></i>
+                    <a class="d-block" href="#">Inksitemotoprint.com</a>
                 </div>
             </div>
         </div>

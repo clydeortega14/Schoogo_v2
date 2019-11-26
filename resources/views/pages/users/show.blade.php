@@ -13,20 +13,27 @@
 	<hr>
 	<div class="row">
 		<div class="col-md-6">
-			<h6>Delivery Address</h6>
-			<hr>
+			<div class="card">
+				<div class="card-body">
+					<h6>Delivery Address</h6>
+					<hr>
 
-			<div class="form-group">	
-				<textarea name="complete_address" id="complete-address" class="form-control" placeholder="Enter Complete Address" required>{{ $order->deliverTo->complete_address }}</textarea>
-			</div>
+					<div class="form-group">	
+						<textarea name="complete_address" id="complete-address" class="form-control" placeholder="Enter Complete Address" required>{{ $order->deliverTo->complete_address }}</textarea>
+					</div>
 
-			<div class="form-group">	
-				<input type="text" name="contact_person" value="{{ $order->deliverTo->contact_person }}" class="form-control" placeholder="Enter Contact Person" required>
-			</div>
+					<div class="form-group">	
+						<input type="text" name="contact_person" value="{{ $order->deliverTo->contact_person }}" class="form-control" placeholder="Enter Contact Person" required>
+					</div>
 
-			<div class="form-group">	
-				<input type="text" name="contact_number" value="{{ $order->deliverTo->contact_number }}" class="form-control" placeholder="Enter Contact Number" required>
+					<div class="form-group">	
+						<input type="text" name="contact_number" value="{{ $order->deliverTo->contact_number }}" class="form-control" placeholder="Enter Contact Number" required>
+					</div>
+				</div>
 			</div>
+			
+
+			
 
 		</div>
 

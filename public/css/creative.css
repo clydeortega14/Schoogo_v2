@@ -2256,14 +2256,14 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #ee3e0d;
-  /*border-color: #ee3e0d;*/
+  background-color: transparent;
+  border-color: #fff;
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #f24516;
-  border-color: #ee3e0d;
+  background-color: transparent;
+  border-color: #fff;
 }
 
 .btn-primary:focus, .btn-primary.focus {
@@ -2280,7 +2280,7 @@ fieldset:disabled a.btn {
 .show > .btn-primary.dropdown-toggle {
   color: #fff;
   background-color: #ee3e0d;
-  border-color: #e23a0d;
+  border-color: #fff;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
@@ -9613,9 +9613,9 @@ hr.light {
   color: #f4623a;
 }
 
-/*#mainNav .navbar-nav .nav-item .nav-link.active {
+#mainNav .navbar-nav .nav-item .nav-link.active {
   color: #f4623a !important;
-}*/
+}
 
 @media (min-width: 992px) {
   #mainNav {
@@ -9647,30 +9647,71 @@ hr.light {
     color: #212529;
   }
   #mainNav.navbar-scrolled .navbar-brand:hover, #mainNav.navbar-scrolled .navbar-nav .nav-item .nav-link:hover, #mainNav .navbar-nav .nav-item .nav-link.active{
-    /*color: #f4623a;*/
-    background: -webkit-linear-gradient(rgba(231, 76, 60, 0.8) 50%, rgba(243, 156, 18,0.8) 50%);
+    color: #f4623a;
+/*    background: -webkit-linear-gradient(rgba(231, 76, 60, 0.8) 50%, rgba(243, 156, 18,0.8) 50%);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: transparent;*/
   }
   #mainNav.navbar-scrolled .navbar-nav .nav-item .nav-link {
     color: #212529;
   }
-/*  #mainNav.navbar-scrolled .navbar-nav .nav-item .nav-link:hover {
+  #mainNav.navbar-scrolled .navbar-nav .nav-item .nav-link:hover {
     color: #f4623a;
-  }*/
+  }
+}
+
+@media(min-width: 500px){
+
+  #mainNav {
+    box-shadow: none;
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  #mainNav.navbar-scrolled {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    background-color: #fff;
+  }
+  #mainNav .navbar-brand {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  #mainNav .navbar-brand:hover {
+    color: #fff;
+  }
+
+  #mainNav .navbar-nav .nav-item .nav-link {
+    color: rgba(255, 255, 255, 0.7);
+    padding: .5rem;
+  }
+  #mainNav .navbar-nav .nav-item .nav-link:hover {
+    color: #fff;
+  }
+   #mainNav .navbar-nav .nav-item:last-child .nav-link {
+    padding-right: 0;
+  }
+  #mainNav.navbar-scrolled {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    background-color: #fff;
+  }
+  /* NAVBAR BRAND ON SCROLLED */
+  #mainNav.navbar-scrolled .navbar-brand {
+    color: #212529;
+  }
+  #mainNav.navbar-scrolled .navbar-brand:hover, #mainNav.navbar-scrolled .navbar-nav .nav-item .nav-link:hover, #mainNav .navbar-nav .nav-item .nav-link.active{
+    color: #f4623a;
+/*    background: -webkit-linear-gradient(rgba(255,0,255 ,1) 50%, #265557 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;*/
+  }
+  #mainNav.navbar-scrolled .navbar-nav .nav-item .nav-link {
+    color: #212529;
+  }
+
 }
 
 header.masthead {
   padding-top: 10rem;
   padding-bottom: calc(10rem - 72px);
-  background: linear-gradient(to right, 
-    rgba(231, 76, 60, 0.8) 0%, 
-    rgba(243, 156, 18,0.8) 15%, 
-    rgba(241, 196, 15, 0.8) 30%, 
-    rgba(46, 204, 113, 0.8) 45%, 
-    rgba(41, 128, 185,0.8) 60%,
-    rgba(52, 152, 219,0.8) 75%,
-    rgba(142, 68, 173,0.8) 100%), url("../img/bg-masthead.jpg");
+  background: linear-gradient(-45deg, #4a6f71, #265557, #FF60FF); 
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
@@ -9678,7 +9719,13 @@ header.masthead {
 }
 
 header.masthead h1 {
-  font-size: 2.25rem;
+  font-size: 7.5rem;
+  font-family: 'Lobster', cursive;
+}
+header.masthead p{
+  font-size: 1.0rem;
+  letter-spacing: 2px;
+
 }
 
 @media (min-width: 992px) {
@@ -9687,18 +9734,20 @@ header.masthead h1 {
     min-height: 40rem;
     padding-top: 72px;
     padding-bottom: 0;
+
   }
   header.masthead p {
     font-size: 1.15rem;
+
   }
   header.masthead h1 {
-    font-size: 2.5rem;
+    font-size: 6.5rem;
   }
 }
 
 @media (min-width: 1200px) {
   header.masthead h1 {
-    font-size: 3.5rem;
+    font-size: 7.5rem;
   }
 }
 

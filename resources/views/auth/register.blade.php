@@ -40,12 +40,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="contact" class="col-md-4 col-form-label text-md-right">{{ __('Contact Number') }}</label>
+                            <label for="contact_number" class="col-md-4 col-form-label text-md-right">{{ __('Contact Number') }}</label>
 
                             <div class="col-md-6">
-                                <input id="contact" type="text" class="form-control @error('contact') is-invalid @enderror" name="contact" value="{{ old('contact') }}">
+                                <input id="contact_number" type="text" class="form-control @error('contact_number') is-invalid @enderror" name="contact_number" value="{{ old('contact_number') }}">
 
-                                @error('contact')
+                                @error('contact_number')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

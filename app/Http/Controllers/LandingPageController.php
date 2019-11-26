@@ -18,7 +18,8 @@ class LandingPageController extends Controller
     }
     public function index()
     {
-    	return view('welcome');
+        $products = Product::inRandomOrder()->take(3)->get();
+    	return view('about-us', compact('products'));
     }
     public function getProducts()
     {
@@ -64,10 +65,6 @@ class LandingPageController extends Controller
         ->with('size', $size)
         ->with('sessionData', $request->session()->get('data'));
         
-    }
-    public function about()
-    {
-    	return view('about-us');
     }
     public function productCategories($prodId)
     {

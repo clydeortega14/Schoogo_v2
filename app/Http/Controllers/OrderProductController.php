@@ -65,7 +65,7 @@ class OrderProductController extends Controller
 
         DB::commit();
 
-        return redirect('/')->with('success', 'You have purchased new order');
+        return redirect()->route('get.products')->with('success', 'You have purchased new order');
     }
 
     protected function getPaper($id)

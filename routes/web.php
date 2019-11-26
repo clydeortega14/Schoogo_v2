@@ -13,7 +13,7 @@
 
 Route::get('/', 'LandingPageController@index');
 
-Route::get('/about-us', 'LandingPageController@about');
+// Route::get('/about-us', 'LandingPageController@about');
 
 // FOR GUEST
 Route::get('/get-products', 'LandingPageController@getProducts')->name('get.products');
