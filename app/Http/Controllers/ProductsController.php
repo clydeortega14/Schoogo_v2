@@ -51,7 +51,7 @@ class ProductsController extends Controller
 
             if($request->hasFile('image')){
 
-                $this->file_manager->manageFile($request->file('image'), 'images/products');
+                $filename = $this->file_manager->manageFile($request->file('image'), 'images/products');
             }
 
             $product = Product::create([

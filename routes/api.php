@@ -18,6 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/product-categories/{id}', 'ProductsController@productCategories');
-Route::get('/get-size/{product_id}/{category_id}', 'LandingPageController@getSize');
+Route::get('/get-size/{product_id}', 'LandingPageController@getSize');
 Route::get('/get-price/{size}/{quantity}', 'LandingPageController@getPrice');
 Route::get('/get-quantity/{size}', 'LandingPageController@getQuantity');
+
+Route::get('/get-categories/{productId}', 'SizesController@getCategories');

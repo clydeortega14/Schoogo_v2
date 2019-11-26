@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\PaperSize;
+use App\Size;
 use App\Product;
+use App\Categories;
 use Illuminate\Support\Facades\DB;
 
 class SizesController extends Controller
@@ -16,7 +17,9 @@ class SizesController extends Controller
      */
     public function index()
     {
-        //
+        $sizes = Size::all();
+
+        return view('pages.admin.sizes.index', compact('sizes'));
     }
 
     /**
@@ -26,7 +29,9 @@ class SizesController extends Controller
      */
     public function create()
     {
-        //
+        $products = Product::where('status', true)->get();
+
+        return view('pages.admin.sizes.create', compact('products'));
     }
 
     /**
@@ -41,10 +46,7 @@ class SizesController extends Controller
 
         try {
 
-            PaperSize::create([
-                'prod_id' => $request->input('product_id'),
-                'size' => $request->input('size')
-            ]);
+            Size::create($this->data($request->toArray()));
             
         } catch (Exception $e) {
             
@@ -55,7 +57,7 @@ class SizesController extends Controller
 
         DB::commit();
 
-        return redirect()->route('products.edit', $request->input('product_id'))->with('success', 'new Product size has been created');
+        return redirect()->route('size.index')->with('success', 'new Product size has been created');
     }
 
     /**
@@ -77,10 +79,10 @@ class SizesController extends Controller
      */
     public function edit($id)
     {
-        $size = PaperSize::findOrFail($id);
-        $product = Product::findOrfail($size->prod_id);
+        $size = Size::findOrFail($id);
+        $products = Product::where('status', true)->get();
 
-        return view('pages.admin.products.edit', compact('size', 'product'));
+        return view('pages.admin.sizes.create', compact('size', 'products'));
     }
 
     /**
@@ -92,16 +94,12 @@ class SizesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $size = PaperSize::findOrFail($id);
 
         DB::beginTransaction();
 
         try {
 
-            $size->update([
-
-                'size' => $request->input('size')
-            ]);
+            Size::where('id', $id)->update($this->data($request->toArray()));
             
         } catch (Exception $e) {
             
@@ -112,7 +110,7 @@ class SizesController extends Controller
 
         DB::commit();
 
-        return redirect()->route('products.edit', $size->prod_id);
+        return redirect()->route('size.index')->with('success', 'size has been updated');
     }
 
     /**
@@ -123,6 +121,35 @@ class SizesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::beginTransaction();
+        try {
+
+            Size::where('id', $id)->delete();
+            
+        } catch (Exception $e) {
+            
+            DB::rollBack();
+
+            return back();
+        }
+
+        DB::commit();
+
+        return redirect()->route('size.index')->with('success', 'size has been deleted');
+    }
+    public function getCategories($prodId)
+    {
+        $categories = Categories::where('product_id', $prodId)->with('products')->get();
+
+        return response()->json($categories);
+    }
+    protected function data(Array $data)
+    {
+        return [
+
+            'product_id' => $data['product_id'],
+            'category_id' => $data['category_id'],
+            'size' => $data['size'],
+        ];
     }
 }

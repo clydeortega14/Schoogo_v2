@@ -14,7 +14,7 @@
 
             <input type="hidden" name="product_id" value="{{ $product->id}}">
             
-            <div class="form-group">
+            <div class="form-group row">
                 <label for="name" class="col-sm-2 control-label">Name</label>
 
                 <div class="col-sm-10">
@@ -22,7 +22,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group row">
                 <label for="description" class="col-sm-2 control-label">Description</label>
 
                 <div class="col-sm-10">
@@ -32,11 +32,11 @@
           
             <div class="row">
               <div class="col-xs-12 col-md-6">
-                <div class="form-group">
+                <div class="form-group row">
                   <label for="description" class="col-sm-2 control-label">Upload Image</label>
 
                   <div class="col-sm-10">
-                    <input type="file" name="image">
+                    <input type="file" name="image" class="form-control">
                   </div>
                 </div>
               </div>

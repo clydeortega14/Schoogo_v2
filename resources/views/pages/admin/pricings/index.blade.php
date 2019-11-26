@@ -22,6 +22,7 @@
                     {{ session('success') }}
                 </div>
             @endif
+
             <div class="box box-primary">
                 <div class="box-header">
                     <h3 class="box-title">Lists</h3>
@@ -43,11 +44,11 @@
                         <tbody>
                            @foreach($pricings as $pricing)
                             <tr>
-                                <td>{{ $pricing->product->name}}</td>
-                                <td>{{ $pricing->categories->name}}</td>
-                                <td>{{ $pricing->size}}</td>
+                                <td>{{ $pricing->sizes->products->name }}</td>
+                                <td>{{ $pricing->sizes->category_id == null ? 'None' : $pricing->sizes->categories->name }}</td>
+                                <td>{{ $pricing->sizes->size }}</td>
                                 <td>{{ $pricing->quantity}}</td>
-                                <td>{{ $pricing->formattedPrice() }}</td>
+                                <td>{{ $pricing->pricingFormattedPrice() }}</td>
                                 <td>
                                     <form action="{{ route('pricings.destroy', $pricing->id) }}" method="POST">
                                         @method('DELETE')

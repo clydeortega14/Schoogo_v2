@@ -47,6 +47,10 @@
         <a href="{{ route('products.index') }}"><i class="fa fa-link"></i> <span>Products</span></a>
       </li>
 
+      <li class="{{ request()->routeIs('size.index') ? 'active' : ''}}">
+        <a href="{{ route('size.index') }}"><i class="fa fa-link"></i> <span>Sizes</span></a>
+      </li>
+
       <li class="treeview">
 
         <a href="#"><i class="fa fa-link"></i> <span>Pricing</span>

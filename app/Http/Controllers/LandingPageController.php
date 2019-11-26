@@ -111,20 +111,9 @@ class LandingPageController extends Controller
 
         return response()->json($size);
     }
-    public function getSize($prodId, $categoryId)
+    public function getSize($prodId)
     {
-        $category = Categories::findOrFail($categoryId);
-        $sizes = Size::where(function($query) use ($category, $prodId){
-
-            if(count($category->sizes) > 0){
-                $query->where('product_id', $prodId)
-                ->where('category_id', $category->id);
-            }else{
-
-                $query->where('product_id', $prodId);
-            }
-
-        })->get();
+        $sizes = Size::where('product_id', $prodId)->get();
 
         return response()->json($sizes);
     }

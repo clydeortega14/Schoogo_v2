@@ -91,8 +91,7 @@
 
 		//size
 		let product_id = $('#prod-id')
-		let category_id = $('#category-id')
-		let size_url = `/api/get-size/${product_id.val()}/${category_id.val()}`;
+		let size_url = `/api/get-size/${product_id.val()}`;
 		$.get(size_url, function(data){
 			sizeOptions(data)
 			getQuantity()

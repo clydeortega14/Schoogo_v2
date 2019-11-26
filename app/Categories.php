@@ -19,6 +19,10 @@ class Categories extends Model
     		'image' => $image,
     	];
     }
+    public function products()
+    {
+        return $this->belongsTo('App\Product', 'product_id', 'id');
+    }
     public function sizes()
     {
         return $this->hasMany('App\Size', 'category_id', 'id');
