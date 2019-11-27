@@ -9708,6 +9708,53 @@ hr.light {
 
 }
 
+@media (min-width: 360px){
+    
+    #mainNav {
+      box-shadow: none;
+      background-color: transparent;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    #mainNav.navbar-scrolled {
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+      background-color: #fff;
+    }
+    #mainNav .navbar-brand {
+      color: rgba(255, 255, 255, 0.7);
+    }
+    #mainNav .navbar-brand:hover {
+      color: #fff;
+    }
+
+    #mainNav .navbar-nav .nav-item .nav-link {
+      color: rgba(255, 255, 255, 0.7);
+      padding: .5rem;
+    }
+    #mainNav .navbar-nav .nav-item .nav-link:hover {
+      color: #fff;
+    }
+     #mainNav .navbar-nav .nav-item:last-child .nav-link {
+      padding-right: 0;
+    }
+    #mainNav.navbar-scrolled {
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+      background-color: #fff;
+    }
+    /* NAVBAR BRAND ON SCROLLED */
+    #mainNav.navbar-scrolled .navbar-brand {
+      color: #212529;
+    }
+    #mainNav.navbar-scrolled .navbar-brand:hover, #mainNav.navbar-scrolled .navbar-nav .nav-item .nav-link:hover, #mainNav .navbar-nav .nav-item .nav-link.active{
+      color: #f4623a;
+  /*    background: -webkit-linear-gradient(rgba(255,0,255 ,1) 50%, #265557 50%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;*/
+    }
+    #mainNav.navbar-scrolled .navbar-nav .nav-item .nav-link {
+      color: #212529;
+    }
+}
+
 header.masthead {
   padding-top: 10rem;
   padding-bottom: calc(10rem - 72px);
@@ -9726,6 +9773,24 @@ header.masthead p{
   font-size: 1.0rem;
   letter-spacing: 2px;
 
+}
+
+@media (min-width: 360px){
+
+   header.masthead {
+    height: 100vh;
+    min-height: 40rem;
+    padding-top: 72px;
+    padding-bottom: 0;
+
+  }
+  header.masthead p {
+    font-size: 1.0rem;
+
+  }
+  header.masthead h1 {
+    font-size: 5.5rem;
+  }
 }
 
 @media (min-width: 992px) {
